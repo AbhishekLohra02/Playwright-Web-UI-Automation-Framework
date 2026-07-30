@@ -12,4 +12,5 @@ def test_locked_out_user_login(page: Page, base_url: str) -> None:
     locked_out_login.open(base_url)
     locked_out_login.login(LOCKED_OUT_USERNAME, PASSWORD)
     expect(locked_out_login.error_message).to_be_visible()
+    expect(locked_out_login.error_message).to_have_text("Epic sadface: Sorry, this user has been locked out.")
     
