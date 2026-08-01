@@ -8,10 +8,10 @@ class LoginPage:
         self.password_input = page.get_by_test_id("password")
         self.login_button = page.get_by_role("button", name="Login")
         self.error_message = page.get_by_test_id("error")
-    
+
     def open(self, base_url: str) -> None:
         self.page.goto(base_url)
-        
+
     def login(self, username: str, password: str) -> None:
         self.username_input.fill(username)
         self.password_input.fill(password)
