@@ -43,18 +43,22 @@ jobs:
 
       - name: Run automated tests
         run: |
-          mkdir -p test-results
+          mkdir -p reports test-results
           python -m pytest \
             --browser chromium \
             --tracing retain-on-failure \
             --screenshot only-on-failure \
-            --junitxml=test-results/junit.xml
+            --junitxml=test-results/junit.xml \
+            --html=reports/report.html \
+            --self-contained-html
 
-      - name: Upload test results
+      - name: Upload test artifacts
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v5
         with:
-          name: playwright-test-results
-          path: test-results/
+          name: playwright-test-artifacts
+          path: |
+            reports/
+            test-results/
           if-no-files-found: warn
           retention-days: 14

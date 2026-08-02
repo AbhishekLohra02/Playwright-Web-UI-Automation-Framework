@@ -1,5 +1,7 @@
 # SauceDemo Test Automation Framework
 
+[![Playwright Tests](https://github.com/AbhishekLohra02/SauceDemo_Test_Automation_Framework/actions/workflows/playwright-tests.yml/badge.svg)](https://github.com/AbhishekLohra02/SauceDemo_Test_Automation_Framework/actions/workflows/playwright-tests.yml)
+
 Python UI automation framework for [SauceDemo](https://www.saucedemo.com/),
 created as part of a QA Automation Engineer assignment.
 
@@ -12,6 +14,7 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 - Pytest 9.1.1
 - Playwright 1.61.0
 - pytest-playwright 0.8.0
+- pytest-html 4.2.0
 - Page Object Model
 
 ## Automated scope
@@ -119,7 +122,37 @@ Run with an explicit browser selection:
 python -m pytest --browser chromium
 ```
 
+Generate a self-contained HTML report locally:
+
+```bash
+python -m pytest --html=reports/report.html --self-contained-html
+```
+
+Open the generated file in a browser:
+
+```text
+reports/report.html
+```
+
 `pytest.ini` configures test discovery, verbose output, and short tracebacks.
+
+## Continuous integration and reporting
+
+The GitHub Actions workflow in `.github/workflows/playwright-tests.yml` runs the
+complete Chromium suite automatically on:
+
+- Pushes to `main`
+- Pull requests targeting `main`
+- Manual workflow execution
+
+Each CI run creates one downloadable `playwright-test-artifacts` archive containing:
+
+- `reports/report.html`: portable, self-contained HTML test report
+- `test-results/junit.xml`: machine-readable test results
+- Playwright traces and screenshots retained when tests fail
+
+The artifact is uploaded for successful and failed test runs and retained for 14
+days. It can be downloaded from the workflow-run summary under **Artifacts**.
 
 ## Architecture
 
@@ -228,15 +261,14 @@ the manual suite due to the assignment time constraint.
 - Checkout Item Total validation compares product prices before tax; tax and the
   final post-tax total are outside that test's scope.
 - Test data contains public demo values and no production secrets.
-- The current project uses standard Pytest console results. CI and enhanced HTML
-  reporting are planned as optional improvements.
+- GitHub Actions executes the Chromium regression suite and publishes JUnit,
+  HTML, trace, and screenshot artifacts where applicable.
 - Manual test documentation must be included in the repository before final
   assignment submission.
 
 ## Future improvements
 
-- GitHub Actions execution on pushes and pull requests
-- HTML test reporting and retained failure artifacts
 - Smoke and regression markers
 - Parallel and cross-browser execution
 - Environment-based URL configuration
+- Historical test-result dashboard and trend analysis
