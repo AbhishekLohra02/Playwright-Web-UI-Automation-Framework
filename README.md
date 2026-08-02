@@ -29,6 +29,16 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.
 
+## Manual test documentation
+
+The focused, risk-based manual test suite is available here:
+
+[Download the manual test suite](./SauceDemo_Manual_Test_Cases_Focused_With_Automation_Mapping.xlsx)
+
+The workbook includes test objectives, priorities, preconditions, test data,
+test steps, expected results, exploratory charters, automation status, and
+traceability between manual cases and the implemented automated tests.
+
 ## Project structure
 
 ```text
