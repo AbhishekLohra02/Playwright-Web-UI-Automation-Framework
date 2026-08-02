@@ -1,0 +1,3 @@
+FIRST_NAME = "Abhishek"
+LAST_NAME = "Sharma"
+POSTAL_CODE = "12345"

@@ -27,3 +27,4 @@ def login_page(page: Page, base_url: str) -> LoginPage:
 def logged_in_inventory_page(login_page: LoginPage) -> InventoryPage:
     login_page.login(STANDARD_USERNAME, PASSWORD)
     return InventoryPage(login_page.page)
+
