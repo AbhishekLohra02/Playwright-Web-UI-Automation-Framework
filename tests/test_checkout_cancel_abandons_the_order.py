@@ -9,6 +9,7 @@ from test_data.products import CART_PRODUCTS
 pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-CHK-009")
 @allure.feature("Abandoning an order")
 @allure.story("Cancelling from the overview keeps the cart")
 @pytest.mark.sanity
@@ -25,6 +26,7 @@ def test_cancel_from_the_order_overview_keeps_the_cart(
     expect(inventory_page.header.cart_badge).to_have_text(str(len(CART_PRODUCTS)))
 
 
+@pytest.mark.manual_case("TC-CHK-009")
 @allure.feature("Abandoning an order")
 @allure.story("Cancelling customer information returns to the cart")
 def test_cancel_from_customer_information_returns_to_the_cart(

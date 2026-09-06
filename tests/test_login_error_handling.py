@@ -13,6 +13,7 @@ from test_data.users import (
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-AUTH-013")
 @allure.feature("Sign in")
 @allure.story("A failed sign-in can be corrected without reloading")
 @pytest.mark.sanity

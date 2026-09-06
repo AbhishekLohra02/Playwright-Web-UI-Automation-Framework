@@ -4,7 +4,7 @@ from decimal import Decimal
 from typing import TYPE_CHECKING
 
 import allure
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Locator, Page, expect
 
 from pages.base_page import AuthenticatedPage
 from pages.components.product_collection import ProductCollection
@@ -27,7 +27,7 @@ class CheckoutOverviewPage(AuthenticatedPage):
         self.finish_button = page.get_by_test_id("finish")
         self.cancel_button = page.get_by_test_id("cancel")
 
-    def _amount(self, label) -> Decimal:
+    def _amount(self, label: Locator) -> Decimal:
         expect(label).to_be_visible()
         return parse_price(label.inner_text())
 

@@ -8,6 +8,7 @@ from test_data.messages import INVENTORY_REQUIRES_LOGIN
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-NAV-003")
 @allure.feature("Session handling")
 @allure.story("A signed-out session cannot be restored")
 @pytest.mark.sanity

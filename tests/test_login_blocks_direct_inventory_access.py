@@ -9,6 +9,7 @@ from test_data.messages import INVENTORY_REQUIRES_LOGIN
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-NAV-008")
 @allure.feature("Session handling")
 @allure.story("The catalogue is not reachable unauthenticated")
 @pytest.mark.smoke

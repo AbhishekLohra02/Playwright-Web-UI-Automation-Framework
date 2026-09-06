@@ -11,6 +11,7 @@ TAX_RATE = Decimal("0.08")
 CENTS = Decimal("0.01")
 
 
+@pytest.mark.manual_case("TC-OVR-004")
 @allure.feature("Order totals")
 @allure.story("Tax and the payable total are correct")
 @pytest.mark.sanity

@@ -96,3 +96,27 @@ page contradicts itself until a reload.
 
 **Covered by:** `tests/test_inventory_state_management.py`, marked
 `xfail(strict=True)`.
+
+---
+
+## SD-007 — The product sort dropdown has no accessible name
+
+**Severity:** Major  **Area:** Product catalogue  **Account:** all
+
+axe-core reports a **critical** `select-name` violation on the inventory page:
+the sort `<select>` carries no label, `aria-label` or `aria-labelledby`, so a
+screen reader announces it only as a combo box with no indication of what it
+controls or what the current selection means.
+
+**Reproduction.** Sign in as any account and run axe-core against
+`/inventory.html`.
+
+**Expected:** the control exposes an accessible name such as "Sort products".
+**Actual:** critical `select-name` violation, 1 node.
+
+Login, cart and checkout information are free of critical and serious
+violations. All four screens share three moderate structural findings —
+`landmark-one-main`, `page-has-heading-one` and `region` — which are recorded
+but do not fail the build.
+
+**Covered by:** `tests/test_accessibility.py`, marked `xfail(strict=True)`.

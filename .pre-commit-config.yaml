@@ -6,6 +6,15 @@ repos:
         args: [--fix]
       - id: ruff-format
 
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        pass_filenames: false
+        additional_dependencies:
+          - pytest==9.1.1
+          - playwright==1.61.0
+
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:

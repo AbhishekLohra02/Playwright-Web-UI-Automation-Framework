@@ -31,6 +31,7 @@ MALICIOUS_CREDENTIALS = [
 ]
 
 
+@pytest.mark.manual_case("TC-AUTH-003", "TC-AUTH-010")
 @allure.feature("Sign in")
 @allure.story("Invalid credentials are rejected")
 @pytest.mark.parametrize(("username", "password"), REJECTED_CREDENTIALS)
@@ -51,6 +52,7 @@ def test_login_rejects_invalid_credentials(
     login_page.expect_loaded()
 
 
+@pytest.mark.manual_case("TC-EXP-AUTH-001")
 @allure.feature("Sign in")
 @allure.story("Malicious input is rejected without leaking behavior")
 @pytest.mark.parametrize(("username", "password"), MALICIOUS_CREDENTIALS)

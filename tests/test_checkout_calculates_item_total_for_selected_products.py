@@ -8,6 +8,7 @@ from test_data.products import CART_PRODUCTS
 pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-OVR-003")
 @allure.feature("Order totals")
 @allure.story("The item total matches the selected products")
 @pytest.mark.sanity

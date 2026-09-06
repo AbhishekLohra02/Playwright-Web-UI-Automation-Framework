@@ -5,8 +5,10 @@
 __pycache__/
 *.py[cod]
 
-# Pytest cache
+# Tooling caches
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
 # Playwright and test artifacts
 allure-results/

@@ -8,6 +8,7 @@ from test_data.users import PASSWORD, STANDARD_USERNAME
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-AUTH-001")
 @allure.feature("Sign in")
 @allure.story("The standard account reaches the catalogue")
 @pytest.mark.smoke

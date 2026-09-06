@@ -9,6 +9,7 @@ from test_data.users import LOCKED_OUT_USERNAME, PASSWORD
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-AUTH-002")
 @allure.feature("Sign in")
 @allure.story("A locked-out account is refused")
 @pytest.mark.sanity

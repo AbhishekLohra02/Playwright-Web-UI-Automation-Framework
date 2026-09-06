@@ -10,6 +10,7 @@ pytestmark = [pytest.mark.cart, pytest.mark.regression]
 REMAINING_PRODUCTS = len(CART_PRODUCTS) - 1
 
 
+@pytest.mark.manual_case("TC-CART-004", "TC-CART-005")
 @allure.feature("Cart contents")
 @allure.story("A product can be removed")
 @pytest.mark.sanity

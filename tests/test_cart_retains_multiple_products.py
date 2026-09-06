@@ -8,6 +8,7 @@ from test_data.products import CART_PRODUCTS
 pytestmark = [pytest.mark.cart, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-CART-001", "TC-CART-003")
 @allure.feature("Cart contents")
 @allure.story("Selected products are retained")
 @pytest.mark.smoke

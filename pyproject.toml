@@ -1,0 +1,83 @@
+[project]
+name = "saucedemo-test-automation"
+version = "1.0.0"
+description = "Playwright UI automation framework for SauceDemo"
+requires-python = ">=3.11"
+
+# ---------------------------------------------------------------------------
+# Pytest
+# ---------------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+base_url = "https://www.saucedemo.com/"
+xfail_strict = true
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--strict-config",
+    "--tracing=retain-on-failure",
+    "--screenshot=only-on-failure",
+    "--alluredir=allure-results",
+    "--clean-alluredir",
+]
+markers = [
+    "smoke: Critical checks proving that the main customer journey is usable",
+    "sanity: Focused checks for validating changed or affected functionality",
+    "regression: Complete automated functional regression coverage",
+    "login: Authentication, session handling, and login negative testing",
+    "inventory: Product catalogue and sorting functionality",
+    "cart: Shopping cart functionality",
+    "checkout: Checkout and order completion functionality",
+    "accessibility: Automated accessibility checks",
+    "manual_case: Manual test case IDs this test covers, for traceability",
+]
+
+# ---------------------------------------------------------------------------
+# Ruff
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # import sorting
+    "UP",   # pyupgrade
+    "B",    # bugbear
+    "PT",   # pytest style
+    "SIM",  # simplification
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Fixtures are requested by name, so unused-looking arguments are intentional.
+"conftest.py" = ["PT004"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+# ---------------------------------------------------------------------------
+# Mypy
+# ---------------------------------------------------------------------------
+[tool.mypy]
+python_version = "3.11"
+files = ["pages", "test_data", "tests", "conftest.py", "scripts"]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+no_implicit_optional = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+# allure-pytest ships no type information.
+module = ["allure", "allure_commons.*", "axe_playwright_python.*", "openpyxl.*"]
+ignore_missing_imports = true

@@ -26,6 +26,7 @@ def _reach_overview(
     return information_page.continue_to_overview()
 
 
+@pytest.mark.manual_case("TC-OVR-003")
 @allure.feature("Order totals")
 @allure.story("The item total is displayed as a currency amount")
 @pytest.mark.sanity
@@ -42,6 +43,7 @@ def test_item_total_is_formatted_as_currency(
     expect(checkout_overview_page.item_total_label).to_have_text(ITEM_TOTAL_CURRENCY)
 
 
+@pytest.mark.manual_case("TC-OVR-001", "TC-OVR-008")
 @allure.feature("Order totals")
 @allure.story("Every selected product is listed on the order overview")
 def test_order_overview_lists_every_selected_product(

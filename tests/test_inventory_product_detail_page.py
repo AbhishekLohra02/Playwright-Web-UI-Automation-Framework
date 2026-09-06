@@ -8,6 +8,7 @@ from test_data.products import BACKPACK, CATALOGUE
 pytestmark = [pytest.mark.inventory, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-DET-001", "TC-DET-002", "TC-INV-006")
 @allure.feature("Product detail")
 @allure.story("A product's detail page matches the catalogue")
 @pytest.mark.sanity
@@ -29,6 +30,7 @@ def test_product_detail_matches_the_catalogue_entry(
     assert detail_page.displayed_price() == CATALOGUE[BACKPACK]
 
 
+@pytest.mark.manual_case("TC-DET-004")
 @allure.feature("Product detail")
 @allure.story("A product can be bought from its detail page")
 @pytest.mark.sanity
@@ -43,6 +45,7 @@ def test_product_can_be_added_to_the_cart_from_its_detail_page(
     expect(detail_page.add_to_cart_button).to_have_count(0)
 
 
+@pytest.mark.manual_case("TC-DET-007")
 @allure.feature("Product detail")
 @allure.story("The cart survives a return to the catalogue")
 def test_back_to_products_returns_to_the_catalogue_with_the_cart_intact(
@@ -54,11 +57,12 @@ def test_back_to_products_returns_to_the_catalogue_with_the_cart_intact(
 
     logged_in_inventory_page.expect_loaded()
     expect(logged_in_inventory_page.header.cart_badge).to_have_text("1")
-    expect(
-        logged_in_inventory_page.products.row(BACKPACK).get_by_role("button")
-    ).to_have_text("Remove")
+    expect(logged_in_inventory_page.products.button_for(BACKPACK)).to_have_text(
+        "Remove"
+    )
 
 
+@pytest.mark.manual_case("TC-INV-011")
 @allure.feature("Product detail")
 @allure.story("A product can be removed from its detail page")
 def test_product_can_be_removed_from_its_detail_page(

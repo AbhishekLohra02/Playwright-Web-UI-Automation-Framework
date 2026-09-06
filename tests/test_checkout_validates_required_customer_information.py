@@ -13,6 +13,7 @@ from test_data.messages import (
 pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-CHK-003", "TC-CHK-004", "TC-CHK-005")
 @allure.feature("Customer information")
 @allure.story("Required fields are enforced")
 @pytest.mark.sanity

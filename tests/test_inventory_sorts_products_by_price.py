@@ -6,6 +6,7 @@ from pages.inventory_page import InventoryPage
 pytestmark = [pytest.mark.inventory, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-SORT-003")
 @allure.feature("Sorting")
 @allure.story("Products sort by ascending price")
 @pytest.mark.sanity
@@ -19,6 +20,7 @@ def test_inventory_sorts_products_by_price_low_to_high(
     assert displayed_prices == sorted(displayed_prices)
 
 
+@pytest.mark.manual_case("TC-SORT-004")
 @allure.feature("Sorting")
 @allure.story("Products sort by descending price")
 @pytest.mark.sanity
@@ -32,6 +34,7 @@ def test_inventory_sorts_products_by_price_high_to_low(
     assert displayed_prices == sorted(displayed_prices, reverse=True)
 
 
+@pytest.mark.manual_case("TC-SORT-001", "TC-SORT-002")
 @allure.feature("Sorting")
 @allure.story("Products sort by name")
 @pytest.mark.sanity

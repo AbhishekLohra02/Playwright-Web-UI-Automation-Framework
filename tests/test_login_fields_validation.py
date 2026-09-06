@@ -9,6 +9,7 @@ from test_data.users import PASSWORD, STANDARD_USERNAME
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-AUTH-006", "TC-AUTH-007", "TC-AUTH-008")
 @allure.feature("Sign in")
 @allure.story("Required fields are enforced")
 @pytest.mark.sanity

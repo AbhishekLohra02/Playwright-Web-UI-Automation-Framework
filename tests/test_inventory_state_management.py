@@ -8,6 +8,7 @@ from test_data.products import BACKPACK, CART_PRODUCTS
 pytestmark = [pytest.mark.inventory, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-INV-010", "TC-INV-011")
 @allure.feature("Cart state")
 @allure.story("A product can be removed from the catalogue listing")
 @pytest.mark.sanity
@@ -22,11 +23,12 @@ def test_product_can_be_removed_without_opening_the_cart(
     logged_in_inventory_page.remove_product_from_cart(BACKPACK)
 
     expect(logged_in_inventory_page.header.cart_badge).to_have_count(0)
-    expect(
-        logged_in_inventory_page.products.row(BACKPACK).get_by_role("button")
-    ).to_have_text("Add to cart")
+    expect(logged_in_inventory_page.products.button_for(BACKPACK)).to_have_text(
+        "Add to cart"
+    )
 
 
+@pytest.mark.manual_case("TC-NAV-004")
 @allure.feature("Cart state")
 @allure.story("Reset App State empties the cart")
 def test_reset_app_state_empties_the_cart(
@@ -44,6 +46,7 @@ def test_reset_app_state_empties_the_cart(
     expect(logged_in_inventory_page.header.cart_badge).to_have_count(0)
 
 
+@pytest.mark.manual_case("TC-NAV-004")
 @allure.feature("Cart state")
 @allure.story("Reset App State refreshes the catalogue buttons")
 @pytest.mark.xfail(
@@ -65,6 +68,6 @@ def test_reset_app_state_restores_the_add_to_cart_buttons(
     logged_in_inventory_page.add_product_to_cart(BACKPACK)
     logged_in_inventory_page.header.reset_app_state()
 
-    expect(
-        logged_in_inventory_page.products.row(BACKPACK).get_by_role("button")
-    ).to_have_text("Add to cart")
+    expect(logged_in_inventory_page.products.button_for(BACKPACK)).to_have_text(
+        "Add to cart"
+    )

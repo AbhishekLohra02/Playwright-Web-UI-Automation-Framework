@@ -18,6 +18,8 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 - pytest-xdist 3.8.0 for parallel execution
 - allure-pytest 2.16.0 for reporting
 - Ruff 0.14.5 for linting and formatting
+- mypy 1.18.2 for static type checking
+- axe-core via axe-playwright-python for accessibility checks
 - Page Object Model
 
 ## Automated scope
@@ -29,11 +31,13 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 | Inventory | Sorting by price and name, product detail page, remove from the listing, Reset App State | 10 |
 | Cart | Retain multiple products, remove a selected product, continue shopping | 3 |
 | Checkout | Successful order, confirmation and emptied cart, Item Total, currency formatting, tax and payable total, required customer information, cancelling an order | 12 |
-| **Total** | | **56** |
+| Accessibility | axe-core scans of login, catalogue, cart and checkout | 4 |
+| **Total** | | **60** |
 
-Two of those are `xfail(strict=True)`, pinning application defects SD-001 and
-SD-006 from the [defect log](./docs/DEFECT_LOG.md). Strict marking means that if
-SauceDemo ever fixes them, the suite fails and tells us to remove the marker.
+Three of those are `xfail(strict=True)`, pinning application defects SD-001,
+SD-006 and SD-007 from the [defect log](./docs/DEFECT_LOG.md). Strict marking
+means that if SauceDemo ever fixes them, the suite fails and tells us to remove
+the marker.
 
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.
@@ -46,6 +50,9 @@ than repeating identical behavior for every product or user.
 - [Defect log](./docs/DEFECT_LOG.md) — application defects found against the
   live site while building this suite, including a floating-point leak in the
   checkout Item Total that affects `standard_user`.
+- [Traceability matrix](./docs/TRACEABILITY.md) — generated, never hand-edited,
+  mapping every manual workbook case to the automated tests that cover it.
+  CI fails if the committed file is stale.
 
 ## Manual test documentation
 
@@ -84,10 +91,11 @@ SauceDemo_Test_Automation/
 |   |-- TEST_STRATEGY.md
 |   `-- DEFECT_LOG.md
 |-- scripts/                # CI helpers
-|   `-- junit_summary.py    # Renders JUnit results as a GitHub job summary
+|   |-- junit_summary.py    # Renders JUnit results as a GitHub job summary
+|   `-- traceability.py     # Regenerates docs/TRACEABILITY.md
+|-- Dockerfile              # Reproducible browser and dependency stack
+|-- pyproject.toml          # Pytest, Ruff, and mypy configuration
 |-- conftest.py             # Shared fixtures and test setup
-|-- pytest.ini              # Pytest discovery, base URL, and output options
-|-- ruff.toml               # Lint and formatting rules
 |-- .pre-commit-config.yaml # Local lint hooks
 |-- requirements.txt        # Pinned runtime dependencies
 |-- requirements-dev.txt    # Pinned lint and tooling dependencies
@@ -231,15 +239,33 @@ which carry information no marker holds, are written on the test itself.
 
 ## Code quality
 
-Ruff enforces lint rules and formatting, configured in `ruff.toml`:
+Ruff and mypy are configured in `pyproject.toml`, alongside the pytest
+settings, so all tool configuration lives in one file:
 
 ```bash
 python -m ruff check .
 python -m ruff format .
+python -m mypy
 ```
 
-The same checks run as a `pre-commit` hook locally and as a required `lint` job
-in CI, which the UI test job depends on.
+mypy runs with `disallow_untyped_defs` across pages, tests, fixtures and
+scripts, which is what verifies the fluent navigation contract — that each
+action really does return the page object it claims.
+
+The same checks run as a `pre-commit` hook locally and as a required
+`static-analysis` job in CI, which the UI test job depends on.
+
+## Running in Docker
+
+Development happens on Windows and CI runs on Ubuntu, which is where most
+"passes locally, fails in CI" reports come from. The image pins the browser
+stack so both execute the same thing:
+
+```bash
+docker build -t saucedemo-tests .
+docker run --rm saucedemo-tests
+docker run --rm saucedemo-tests -m smoke --browser firefox
+```
 
 ## Continuous integration and reporting
 
@@ -417,6 +443,7 @@ the manual suite due to the assignment time constraint.
 
 ## Future improvements
 
-- Cross-browser matrix covering Firefox and WebKit
-- Allure trend history published to GitHub Pages
-- Layered smoke-then-regression CI gates
+- Visual regression baselines for the catalogue and checkout
+- A quarantine marker and dashboard for tests under investigation
+- Contract checks against the SauceDemo endpoints to isolate UI from data
+  failures

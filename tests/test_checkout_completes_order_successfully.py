@@ -8,6 +8,7 @@ from test_data.messages import ORDER_COMPLETE_HEADER, ORDER_COMPLETE_TEXT
 pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 
 
+@pytest.mark.manual_case("TC-CHK-001", "TC-ORD-001", "TC-ORD-002")
 @allure.feature("Order completion")
 @allure.story("An order can be placed end to end")
 @pytest.mark.smoke
@@ -22,6 +23,7 @@ def test_checkout_completes_order_successfully(
     expect(checkout_complete_page.complete_text).to_have_text(ORDER_COMPLETE_TEXT)
 
 
+@pytest.mark.manual_case("TC-ORD-003", "TC-ORD-004")
 @allure.feature("Order completion")
 @allure.story("A completed order empties the cart")
 @pytest.mark.sanity

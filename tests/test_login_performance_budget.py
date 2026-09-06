@@ -2,6 +2,7 @@ import time
 
 import allure
 import pytest
+from playwright.sync_api import Page
 
 from pages.inventory_page import InventoryPage
 from pages.login_page import LoginPage
@@ -46,7 +47,7 @@ def test_standard_user_signs_in_within_budget(login_page: LoginPage) -> None:
 @allure.feature("Sign in")
 @allure.story("The performance-glitch account is measurably degraded")
 def test_performance_glitch_user_sign_in_is_measurably_slower(
-    page, login_page: LoginPage
+    page: Page, login_page: LoginPage
 ) -> None:
     """Prove the harness can actually detect a slow sign-in.
 
