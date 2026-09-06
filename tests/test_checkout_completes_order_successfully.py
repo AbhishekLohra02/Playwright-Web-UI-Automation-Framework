@@ -1,32 +1,43 @@
+import pytest
 from playwright.sync_api import expect
 
-from pages.cart_page import CartPage
 from pages.checkout_complete_page import CheckoutCompletePage
-from pages.checkout_information_page import CheckoutInformationPage
 from pages.checkout_overview_page import CheckoutOverviewPage
 from pages.inventory_page import InventoryPage
-from test_data.customers import FIRST_NAME, LAST_NAME, POSTAL_CODE
-from test_data.products import CART_PRODUCTS
+from test_data.messages import ORDER_COMPLETE_HEADER, ORDER_COMPLETE_TEXT
 
+pytestmark = [pytest.mark.checkout, pytest.mark.regression]
+
+
+@pytest.mark.smoke
+@pytest.mark.sanity
 def test_checkout_completes_order_successfully(
-        logged_in_inventory_page: InventoryPage
+    checkout_overview_page: CheckoutOverviewPage,
 ) -> None:
-    
-    for product_name in CART_PRODUCTS:
-        logged_in_inventory_page.add_product_to_cart(product_name)
-    
-    logged_in_inventory_page.open_cart()
-    cart_page = CartPage(logged_in_inventory_page.page)
-    cart_page.start_checkout()
-    
-    checkout_information_page = CheckoutInformationPage(cart_page.page)
-    checkout_information_page.enter_details(
-        FIRST_NAME, LAST_NAME, POSTAL_CODE
-    )
-    checkout_information_page.click_continue()
-
-    checkout_overview_page = CheckoutOverviewPage(checkout_information_page.page)
     checkout_overview_page.finish_checkout()
+
     checkout_complete_page = CheckoutCompletePage(checkout_overview_page.page)
+
+    checkout_complete_page.expect_loaded()
     expect(checkout_complete_page.complete_header).to_be_visible()
-    expect(checkout_complete_page.complete_header).to_have_text("Thank you for your order!")
+    expect(checkout_complete_page.complete_header).to_have_text(ORDER_COMPLETE_HEADER)
+    expect(checkout_complete_page.complete_text).to_have_text(ORDER_COMPLETE_TEXT)
+
+
+@pytest.mark.sanity
+def test_completed_order_empties_the_cart(
+    checkout_overview_page: CheckoutOverviewPage,
+) -> None:
+    checkout_overview_page.finish_checkout()
+
+    checkout_complete_page = CheckoutCompletePage(checkout_overview_page.page)
+    checkout_complete_page.expect_loaded()
+
+    expect(checkout_complete_page.cart_badge).to_have_count(0)
+
+    checkout_complete_page.back_home()
+
+    inventory_page = InventoryPage(checkout_complete_page.page)
+
+    inventory_page.expect_loaded()
+    expect(inventory_page.cart_badge).to_have_count(0)

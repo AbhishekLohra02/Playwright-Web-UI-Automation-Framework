@@ -15,16 +15,18 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 - Playwright 1.61.0
 - pytest-playwright 0.8.0
 - pytest-html 4.2.0
+- Ruff 0.14.5 for linting and formatting
 - Page Object Model
 
 ## Automated scope
 
 | Module | Automated coverage | Executions |
 |---|---|---:|
-| Login | Successful login, locked-out user, invalid credentials, required fields | 8 |
-| Cart | Retain multiple products, remove a selected product | 2 |
-| Checkout | Successful order, dynamic Item Total, required customer information | 5 |
-| **Total** | | **15** |
+| Login | Successful login, locked-out user, invalid credentials, required fields, unauthenticated access guard, logout | 10 |
+| Inventory | Sorting by price (both directions) and by name | 3 |
+| Cart | Retain multiple products, remove a selected product, continue shopping | 3 |
+| Checkout | Successful order, order confirmation and emptied cart, Item Total, tax and payable total, required customer information | 7 |
+| **Total** | | **23** |
 
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.
@@ -44,20 +46,26 @@ traceability between manual cases and the implemented automated tests.
 ```text
 SauceDemo_Test_Automation/
 |-- pages/                  # Page Objects, locators, and page actions
+|   |-- base_page.py        # BasePage and AuthenticatedPage shared behavior
+|   |-- prices.py           # Displayed-price parsing helper
 |   |-- login_page.py
 |   |-- inventory_page.py
 |   |-- cart_page.py
 |   |-- checkout_information_page.py
 |   |-- checkout_overview_page.py
 |   `-- checkout_complete_page.py
-|-- test_data/              # Reusable users, products, and customer data
+|-- test_data/              # Reusable users, products, customers, messages
 |   |-- users.py
 |   |-- products.py
-|   `-- customers.py
+|   |-- customers.py
+|   `-- messages.py
 |-- tests/                  # Independent Pytest scenarios
 |-- conftest.py             # Shared fixtures and test setup
-|-- pytest.ini              # Pytest discovery and output configuration
-|-- requirements.txt        # Pinned Python dependencies
+|-- pytest.ini              # Pytest discovery, base URL, and output options
+|-- ruff.toml               # Lint and formatting rules
+|-- .pre-commit-config.yaml # Local lint hooks
+|-- requirements.txt        # Pinned runtime dependencies
+|-- requirements-dev.txt    # Pinned lint and tooling dependencies
 `-- README.md
 ```
 
@@ -98,6 +106,13 @@ Install the pinned dependencies:
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+Install the lint and formatting tooling as well when contributing:
+
+```bash
+python -m pip install -r requirements-dev.txt
+pre-commit install
 ```
 
 Install the Chromium browser used by Playwright:
@@ -144,12 +159,40 @@ Open the generated file in a browser:
 reports/report.html
 ```
 
-`pytest.ini` configures test discovery, verbose output, and short tracebacks.
+Run a single test category using markers:
+
+```bash
+python -m pytest -m smoke
+python -m pytest -m "checkout and not smoke"
+```
+
+Run against a different environment without editing code:
+
+```bash
+python -m pytest --base-url https://www.saucedemo.com/
+```
+
+`pytest.ini` configures test discovery, the default base URL, verbose output,
+short tracebacks, strict markers, and failure-only traces and screenshots.
+Because tracing and screenshots are configured there rather than in CI, a local
+failure produces the same artifacts a CI failure does, under `test-results/`.
+
+## Code quality
+
+Ruff enforces lint rules and formatting, configured in `ruff.toml`:
+
+```bash
+python -m ruff check .
+python -m ruff format .
+```
+
+The same checks run as a `pre-commit` hook locally and as a required `lint` job
+in CI, which the UI test job depends on.
 
 ## Continuous integration and reporting
 
-The GitHub Actions workflow in `.github/workflows/playwright-tests.yml` runs the
-complete Chromium suite automatically on:
+The GitHub Actions workflow in `.github/workflows/playwright-tests.yml` runs
+Ruff and then the complete Chromium suite automatically on:
 
 - Pushes to `main`
 - Pull requests targeting `main`
@@ -171,6 +214,12 @@ days. It can be downloaded from the workflow-run summary under **Artifacts**.
 Each application screen has a dedicated Page Object. Page Objects own their
 locators and expose meaningful actions, while tests own the scenario flow and
 assertions.
+
+`BasePage` holds the Playwright `Page`, the path each screen owns as `url_path`,
+and an `expect_loaded()` navigation guarantee, so tests assert arrival on a page
+through the page object instead of concatenating URL strings.
+`AuthenticatedPage` extends it with the header shared by every post-login
+screen: page title, cart link, cart badge, burger menu, and logout.
 
 For example:
 
@@ -199,14 +248,24 @@ tab to expose the new screen's behavior.
 
 ### Fixture design
 
-Shared setup is defined in `conftest.py`:
+Shared setup is defined in `conftest.py` as a chain, so each test enters at the
+exact state its scenario needs and no test repeats another test's setup:
 
-- `base_url` provides the SauceDemo URL for the test session.
 - `configure_test_id_attribute` configures Playwright's test-ID engine to use
   SauceDemo's `data-test` attribute.
 - `login_page` creates a fresh Login page for each test.
 - `logged_in_inventory_page` performs the standard-user login and returns an
   Inventory page for authenticated Cart and Checkout scenarios.
+- `cart_with_products` adds the selected products and opens the cart.
+- `checkout_information_page` starts checkout from that cart.
+- `checkout_overview_page` submits valid customer information and returns the
+  order overview.
+
+The base URL is not a project fixture. It is supplied by `pytest-base-url`
+through the `base_url` key in `pytest.ini`, which means it can be overridden per
+run with `--base-url` or the `PYTEST_BASE_URL` environment variable, and is
+injected into the Playwright browser context so page objects navigate with
+relative paths.
 
 Function-scoped browser state keeps tests isolated and prevents cart or login
 state from leaking between executions.
@@ -268,17 +327,15 @@ the manual suite due to the assignment time constraint.
 - SauceDemo is available and its public test credentials remain valid.
 - Chromium is the primary verified browser.
 - Product names and `data-test` attributes are treated as stable contracts.
-- Checkout Item Total validation compares product prices before tax; tax and the
-  final post-tax total are outside that test's scope.
+- Checkout validation covers the Item Total, the 8% tax, and the payable total.
 - Test data contains public demo values and no production secrets.
 - GitHub Actions executes the Chromium regression suite and publishes JUnit,
   HTML, trace, and screenshot artifacts where applicable.
-- Manual test documentation must be included in the repository before final
-  assignment submission.
+- Manual test documentation is included in the repository as an Excel workbook.
 
 ## Future improvements
 
-- Smoke and regression markers
-- Parallel and cross-browser execution
-- Environment-based URL configuration
+- Parallel execution with `pytest-xdist`
+- Cross-browser matrix and a scheduled nightly regression run
+- Cached Playwright browser binaries in CI
 - Historical test-result dashboard and trend analysis
