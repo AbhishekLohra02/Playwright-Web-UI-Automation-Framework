@@ -1,9 +1,11 @@
 name: Playwright Tests
 
 on:
+  # Every branch gets the pipeline, so a change is verified where it is written
+  # rather than only once it reaches main.
   push:
     branches:
-      - main
+      - "**"
   pull_request:
     branches:
       - main
@@ -17,7 +19,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  # head_ref for pull requests, ref_name for pushes: both resolve to the plain
+  # branch name, so a branch that also has a pull request open shares one group
+  # instead of running the whole suite twice in parallel.
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:

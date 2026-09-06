@@ -272,11 +272,15 @@ docker run --rm saucedemo-tests -m smoke --browser firefox
 The GitHub Actions workflow in `.github/workflows/playwright-tests.yml` runs
 Ruff and then the complete Chromium suite automatically on:
 
-- Pushes to `main`
+- Pushes to any branch, so work is verified where it is written rather than
+  only once it reaches `main`
 - Pull requests targeting `main`
 - A nightly schedule at 02:00 UTC, because SauceDemo is a third-party
   dependency that can break between pull requests
 - Manual workflow execution
+
+Pull requests and the nightly run cover Chromium only and Chromium, Firefox
+and WebKit respectively; the Allure report is published from `main` alone.
 
 The pipeline runs Ruff first, then the UI suite in parallel with
 `--numprocesses auto`, with the Playwright browser binaries cached between runs.
