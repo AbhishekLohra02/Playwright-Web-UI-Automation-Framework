@@ -13,10 +13,8 @@ from test_data.messages import (
 pytestmark = [pytest.mark.checkout, pytest.mark.regression]
 
 
-@allure.epic("Checkout")
 @allure.feature("Customer information")
 @allure.story("Required fields are enforced")
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.sanity
 @pytest.mark.parametrize(
     ("first_name", "last_name", "postal_code", "expected_error"),

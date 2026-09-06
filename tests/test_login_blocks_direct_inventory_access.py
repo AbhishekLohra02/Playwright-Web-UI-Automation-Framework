@@ -9,10 +9,8 @@ from test_data.messages import INVENTORY_REQUIRES_LOGIN
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
-@allure.epic("Authentication")
 @allure.feature("Session handling")
 @allure.story("The catalogue is not reachable unauthenticated")
-@allure.severity(allure.severity_level.BLOCKER)
 @pytest.mark.smoke
 @pytest.mark.sanity
 def test_inventory_is_not_reachable_without_logging_in(page: Page) -> None:
@@ -22,4 +20,4 @@ def test_inventory_is_not_reachable_without_logging_in(page: Page) -> None:
 
     expect(login_page.error_message).to_be_visible()
     expect(login_page.error_message).to_have_text(INVENTORY_REQUIRES_LOGIN)
-    expect(InventoryPage(page).inventory_list).to_have_count(0)
+    expect(InventoryPage(page).products.rows).to_have_count(0)

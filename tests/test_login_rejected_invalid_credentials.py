@@ -31,10 +31,8 @@ MALICIOUS_CREDENTIALS = [
 ]
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("Invalid credentials are rejected")
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.parametrize(("username", "password"), REJECTED_CREDENTIALS)
 def test_login_rejects_invalid_credentials(
     login_page: LoginPage,
@@ -53,10 +51,8 @@ def test_login_rejects_invalid_credentials(
     login_page.expect_loaded()
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("Malicious input is rejected without leaking behavior")
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.parametrize(("username", "password"), MALICIOUS_CREDENTIALS)
 def test_login_rejects_malicious_input(
     login_page: LoginPage,

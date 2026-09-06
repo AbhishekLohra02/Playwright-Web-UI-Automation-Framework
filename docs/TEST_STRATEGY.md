@@ -80,6 +80,25 @@ does not leak behavior:
 - The catalogue is unreachable by direct URL, and the browser Back button does
   not restore a signed-out session.
 
+## Framework architecture
+
+The Page Object Model is the architecture; the reporting layer sits on top of
+it and does not shape it.
+
+- **Pages** own locators and expose actions. They never assert business rules;
+  tests do.
+- **Components** are widgets shared by several screens — the header and the
+  repeated product-row collection — composed into pages rather than inherited.
+  This keeps the page hierarchy describing pages instead of accumulating
+  widgets, and keeps shared locators in one file.
+- **Navigation returns the next page object** and asserts arrival, so a test
+  reads as a journey. Actions used by negative tests deliberately return
+  nothing, because promising a destination a negative test does not reach would
+  be a lie encoded in the API.
+- **Reporting metadata is derived, not repeated.** Allure's epic and severity
+  come from the pytest markers a test already carries, so area and level are
+  declared once and cannot drift between selection and reporting.
+
 ## Environments
 
 The base URL is supplied by `pytest-base-url` through the `base_url` key in

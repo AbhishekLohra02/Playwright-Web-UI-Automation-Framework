@@ -9,10 +9,8 @@ from test_data.users import LOCKED_OUT_USERNAME, PASSWORD
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("A locked-out account is refused")
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.sanity
 def test_locked_out_user_login(login_page: LoginPage) -> None:
     login_page.login(LOCKED_OUT_USERNAME, PASSWORD)

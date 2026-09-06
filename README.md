@@ -26,10 +26,14 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 |---|---|---:|
 | Login | Every accepted account signs in, locked-out account refused, invalid credentials, case and whitespace exactness, injection and oversized input, required fields, error dismissal and retry, keyboard submit, masked password, sign-in performance budget | 31 |
 | Session | Unauthenticated URL access, logout, browser-Back after logout | (included above) |
-| Inventory | Sorting by price (both directions) and by name | 3 |
+| Inventory | Sorting by price and name, product detail page, remove from the listing, Reset App State | 10 |
 | Cart | Retain multiple products, remove a selected product, continue shopping | 3 |
-| Checkout | Successful order, order confirmation and emptied cart, Item Total, tax and payable total, required customer information | 7 |
-| **Total** | | **44** |
+| Checkout | Successful order, confirmation and emptied cart, Item Total, currency formatting, tax and payable total, required customer information, cancelling an order | 12 |
+| **Total** | | **56** |
+
+Two of those are `xfail(strict=True)`, pinning application defects SD-001 and
+SD-006 from the [defect log](./docs/DEFECT_LOG.md). Strict marking means that if
+SauceDemo ever fixes them, the suite fails and tells us to remove the marker.
 
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.
@@ -58,9 +62,13 @@ traceability between manual cases and the implemented automated tests.
 ```text
 SauceDemo_Test_Automation/
 |-- pages/                  # Page Objects, locators, and page actions
+|   |-- components/         # Reusable widgets composed into pages
+|   |   |-- header.py       # Banner, cart badge, and menu
+|   |   `-- product_collection.py  # Repeated product rows
 |   |-- base_page.py        # BasePage and AuthenticatedPage shared behavior
 |   |-- prices.py           # Displayed-price parsing helper
 |   |-- login_page.py
+|   |-- product_detail_page.py
 |   |-- inventory_page.py
 |   |-- cart_page.py
 |   |-- checkout_information_page.py
@@ -212,9 +220,14 @@ Install the CLI once (it needs a JRE), then generate and open the report:
 allure serve allure-results
 ```
 
-Tests carry `epic`, `feature`, `story` and `severity` labels, page-object
-actions are recorded as steps, and a failing test attaches the URL and a
-full-page screenshot taken at the moment of failure.
+Page-object actions are recorded as steps, and a failing test attaches the URL
+and a full-page screenshot taken at the moment of failure.
+
+Report metadata is derived rather than repeated. The `epic` comes from the area
+marker a test already carries and the `severity` from its level marker, both in
+`pytest_collection_modifyitems`, so `pytest.mark.checkout` is the single source
+of truth for both test selection and reporting. Only `feature` and `story`,
+which carry information no marker holds, are written on the test itself.
 
 ## Code quality
 
@@ -266,8 +279,29 @@ assertions.
 `BasePage` holds the Playwright `Page`, the path each screen owns as `url_path`,
 and an `expect_loaded()` navigation guarantee, so tests assert arrival on a page
 through the page object instead of concatenating URL strings.
-`AuthenticatedPage` extends it with the header shared by every post-login
-screen: page title, cart link, cart badge, burger menu, and logout.
+
+**Components over inheritance.** Widgets that appear on several screens are
+composed in, not inherited. `AuthenticatedPage` owns a `HeaderComponent`
+(`page.header.cart_badge`, `page.header.logout()`), because a cart page is not a
+kind of header — it has one. `ProductCollection` wraps the repeated product-row
+markup shared by the inventory grid, the cart and the order overview, so
+filtering a row by name and parsing its price exist once rather than in three
+page objects.
+
+**Navigation returns the next page.** Actions that move between screens return
+the page object for where they land and assert arrival on the way:
+
+```python
+information_page = inventory_page.header.open_cart().start_checkout()
+overview_page = information_page.continue_to_overview()
+complete_page = overview_page.finish_checkout()
+```
+
+Tests therefore read as journeys instead of constructor calls, and the page
+objects — not the tests — hold the knowledge of what follows what. Where a
+negative test expects to stay put, a raw variant makes no such promise:
+`login()` and `click_continue()` submit without asserting a destination, while
+`login_as()` and `continue_to_overview()` are the happy-path counterparts.
 
 For example:
 

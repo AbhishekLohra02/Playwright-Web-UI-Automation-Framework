@@ -1,7 +1,14 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 import allure
 from playwright.sync_api import Page
 
 from pages.base_page import BasePage
+
+if TYPE_CHECKING:
+    from pages.inventory_page import InventoryPage
 
 
 class LoginPage(BasePage):
@@ -18,14 +25,33 @@ class LoginPage(BasePage):
         self.error_close_button = page.get_by_test_id("error-button")
         self.accepted_usernames = page.locator("#login_credentials")
 
-    @allure.step("Log in as '{username}'")
-    def login(self, username: str, password: str) -> None:
-        self.enter_credentials(username, password)
-        self.login_button.click()
-
     def enter_credentials(self, username: str, password: str) -> None:
         self.username_input.fill(username)
         self.password_input.fill(password)
+
+    @allure.step("Submit the login form as '{username}'")
+    def login(self, username: str, password: str) -> None:
+        """Submit credentials without asserting where they lead.
+
+        Negative tests use this: they expect to stay on the login page, so
+        promising a next page here would be a lie.
+        """
+        self.enter_credentials(username, password)
+        self.login_button.click()
+
+    @allure.step("Sign in as '{username}'")
+    def login_as(self, username: str, password: str) -> InventoryPage:
+        """Sign in and land on the catalogue.
+
+        The happy path, and the only variant that may promise a next page.
+        """
+        from pages.inventory_page import InventoryPage
+
+        self.login(username, password)
+
+        inventory_page = InventoryPage(self.page)
+        inventory_page.expect_loaded()
+        return inventory_page
 
     @allure.step("Submit the login form with the Enter key")
     def submit_with_enter(self) -> None:

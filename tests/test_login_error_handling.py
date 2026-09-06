@@ -13,10 +13,8 @@ from test_data.users import (
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("A failed sign-in can be corrected without reloading")
-@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.sanity
 def test_error_can_be_dismissed_and_login_retried(
     login_page: LoginPage,
@@ -41,10 +39,8 @@ def test_error_can_be_dismissed_and_login_retried(
     expect(login_page.page).to_have_url("/inventory.html")
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("The form submits from the keyboard")
-@allure.severity(allure.severity_level.NORMAL)
 def test_login_can_be_submitted_with_the_enter_key(
     login_page: LoginPage,
 ) -> None:
@@ -54,18 +50,14 @@ def test_login_can_be_submitted_with_the_enter_key(
     expect(login_page.page).to_have_url("/inventory.html")
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("Credentials are not exposed on screen")
-@allure.severity(allure.severity_level.NORMAL)
 def test_password_is_masked(login_page: LoginPage) -> None:
     expect(login_page.password_input).to_have_attribute("type", "password")
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("A rejected attempt does not carry over")
-@allure.severity(allure.severity_level.MINOR)
 def test_error_state_is_cleared_on_a_fresh_visit(
     login_page: LoginPage,
 ) -> None:

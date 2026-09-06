@@ -11,10 +11,8 @@ TAX_RATE = Decimal("0.08")
 CENTS = Decimal("0.01")
 
 
-@allure.epic("Checkout")
 @allure.feature("Order totals")
 @allure.story("Tax and the payable total are correct")
-@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.sanity
 def test_checkout_calculates_tax_and_payable_total(
     checkout_overview_page: CheckoutOverviewPage,

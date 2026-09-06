@@ -75,3 +75,24 @@ and the amount charged disagree.
 Entering First Name "Abhishek" then Last Name "Sharma" results in First Name
 "Sharma" and an empty Last Name: the last-name field writes into the first-name
 field and clears itself.
+
+---
+
+## SD-006 — Reset App State leaves the catalogue buttons stale
+
+**Severity:** Minor  **Area:** Product catalogue  **Account:** all
+
+Reset App State clears the underlying state — the cart badge disappears and
+`/cart.html` is empty — but the inventory listing is not re-rendered, so every
+affected product still shows a **Remove** button. Reloading the page corrects
+the labels.
+
+**Reproduction.** Sign in as `standard_user`, add any product, then choose
+Reset App State from the menu.
+
+**Expected:** the product's button returns to `Add to cart`.
+**Actual:** the button still reads `Remove` while the cart is empty, so the
+page contradicts itself until a reload.
+
+**Covered by:** `tests/test_inventory_state_management.py`, marked
+`xfail(strict=True)`.

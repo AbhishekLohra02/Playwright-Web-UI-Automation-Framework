@@ -1,7 +1,15 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 import allure
 from playwright.sync_api import Page
 
 from pages.base_page import AuthenticatedPage
+
+if TYPE_CHECKING:
+    from pages.cart_page import CartPage
+    from pages.checkout_overview_page import CheckoutOverviewPage
 
 
 class CheckoutInformationPage(AuthenticatedPage):
@@ -13,6 +21,7 @@ class CheckoutInformationPage(AuthenticatedPage):
         self.last_name_input = page.get_by_placeholder("Last Name")
         self.postal_code_input = page.get_by_placeholder("Zip/Postal Code")
         self.continue_button = page.get_by_role("button", name="Continue")
+        self.cancel_button = page.get_by_test_id("cancel")
         self.error_message = page.get_by_test_id("error")
 
     @allure.step("Enter customer information")
@@ -21,6 +30,31 @@ class CheckoutInformationPage(AuthenticatedPage):
         self.last_name_input.fill(last_name)
         self.postal_code_input.fill(postal_code)
 
-    @allure.step("Continue to the order overview")
+    @allure.step("Submit the customer information form")
     def click_continue(self) -> None:
+        """Submit without asserting where it leads.
+
+        Required-field tests expect to stay on this page, so this variant makes
+        no promise about the next screen.
+        """
         self.continue_button.click()
+
+    @allure.step("Continue to the order overview")
+    def continue_to_overview(self) -> CheckoutOverviewPage:
+        from pages.checkout_overview_page import CheckoutOverviewPage
+
+        self.click_continue()
+
+        overview_page = CheckoutOverviewPage(self.page)
+        overview_page.expect_loaded()
+        return overview_page
+
+    @allure.step("Cancel the checkout")
+    def cancel_checkout(self) -> CartPage:
+        from pages.cart_page import CartPage
+
+        self.cancel_button.click()
+
+        cart_page = CartPage(self.page)
+        cart_page.expect_loaded()
+        return cart_page

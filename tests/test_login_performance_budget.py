@@ -22,15 +22,12 @@ STANDARD_LOGIN_BUDGET_SECONDS = 10.0
 
 def _measure_login(login_page: LoginPage, username: str) -> float:
     started = time.perf_counter()
-    login_page.login(username, PASSWORD)
-    InventoryPage(login_page.page).expect_loaded()
+    login_page.login_as(username, PASSWORD)
     return time.perf_counter() - started
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("Sign-in stays within its performance budget")
-@allure.severity(allure.severity_level.NORMAL)
 def test_standard_user_signs_in_within_budget(login_page: LoginPage) -> None:
     elapsed = _measure_login(login_page, STANDARD_USERNAME)
 
@@ -46,10 +43,8 @@ def test_standard_user_signs_in_within_budget(login_page: LoginPage) -> None:
     )
 
 
-@allure.epic("Authentication")
 @allure.feature("Sign in")
 @allure.story("The performance-glitch account is measurably degraded")
-@allure.severity(allure.severity_level.NORMAL)
 def test_performance_glitch_user_sign_in_is_measurably_slower(
     page, login_page: LoginPage
 ) -> None:
@@ -61,7 +56,7 @@ def test_performance_glitch_user_sign_in_is_measurably_slower(
     """
     standard_seconds = _measure_login(login_page, STANDARD_USERNAME)
 
-    InventoryPage(page).logout()
+    InventoryPage(page).header.logout()
     glitch_seconds = _measure_login(login_page, PERFORMANCE_GLITCH_USERNAME)
 
     allure.attach(

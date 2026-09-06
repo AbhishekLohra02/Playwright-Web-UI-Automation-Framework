@@ -11,6 +11,22 @@ from test_data.customers import FIRST_NAME, LAST_NAME, POSTAL_CODE
 from test_data.products import CART_PRODUCTS
 from test_data.users import PASSWORD, STANDARD_USERNAME
 
+# One source of truth for the area a test belongs to. The pytest marker drives
+# both selection (`-m checkout`) and the Allure epic, so the two can never
+# disagree and no test has to repeat itself in a decorator.
+AREA_EPICS = {
+    "login": "Authentication",
+    "inventory": "Product catalogue",
+    "cart": "Shopping cart",
+    "checkout": "Checkout",
+}
+
+# Test level implies how much a failure matters.
+LEVEL_SEVERITIES = {
+    "smoke": allure.severity_level.BLOCKER,
+    "sanity": allure.severity_level.CRITICAL,
+}
+
 
 def pytest_configure(config: pytest.Config) -> None:
     """Make the `base_url` ini value reach pytest-xdist workers.
@@ -23,6 +39,27 @@ def pytest_configure(config: pytest.Config) -> None:
     """
     if config.getoption("base_url") is None:
         config.option.base_url = config.getini("base_url")
+
+
+def pytest_collection_modifyitems(items: list[pytest.Item]) -> None:
+    """Derive Allure epic and severity from the markers a test already has."""
+    for item in items:
+        marker_names = {marker.name for marker in item.iter_markers()}
+
+        for marker_name, epic in AREA_EPICS.items():
+            if marker_name in marker_names:
+                item.add_marker(allure.epic(epic))
+                break
+
+        severity = next(
+            (
+                LEVEL_SEVERITIES[level]
+                for level in ("smoke", "sanity")
+                if level in marker_names
+            ),
+            allure.severity_level.NORMAL,
+        )
+        item.add_marker(allure.severity(severity))
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -39,8 +76,7 @@ def login_page(page: Page) -> LoginPage:
 
 @pytest.fixture
 def logged_in_inventory_page(login_page: LoginPage) -> InventoryPage:
-    login_page.login(STANDARD_USERNAME, PASSWORD)
-    return InventoryPage(login_page.page)
+    return login_page.login_as(STANDARD_USERNAME, PASSWORD)
 
 
 @pytest.fixture
@@ -49,8 +85,7 @@ def cart_with_products(logged_in_inventory_page: InventoryPage) -> CartPage:
     for product_name in CART_PRODUCTS:
         logged_in_inventory_page.add_product_to_cart(product_name)
 
-    logged_in_inventory_page.open_cart()
-    return CartPage(logged_in_inventory_page.page)
+    return logged_in_inventory_page.header.open_cart()
 
 
 @pytest.fixture
@@ -58,8 +93,7 @@ def checkout_information_page(
     cart_with_products: CartPage,
 ) -> CheckoutInformationPage:
     """Checkout started, waiting on customer information."""
-    cart_with_products.start_checkout()
-    return CheckoutInformationPage(cart_with_products.page)
+    return cart_with_products.start_checkout()
 
 
 @pytest.fixture
@@ -68,8 +102,7 @@ def checkout_overview_page(
 ) -> CheckoutOverviewPage:
     """Valid customer information submitted, showing the order overview."""
     checkout_information_page.enter_details(FIRST_NAME, LAST_NAME, POSTAL_CODE)
-    checkout_information_page.click_continue()
-    return CheckoutOverviewPage(checkout_information_page.page)
+    return checkout_information_page.continue_to_overview()
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)

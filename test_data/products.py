@@ -29,3 +29,14 @@ CART_PRODUCTS = (
     BACKPACK,
     BIKE_LIGHT,
 )
+
+# Summing these four prices exposes SD-001: the order overview prints the item
+# total as a raw floating-point value, `$105.96000000000001` instead of
+# `$105.96`. Whether the defect appears depends entirely on the combination,
+# which is why it hides behind a two-product selection.
+FLOAT_ARTIFACT_PRODUCTS = (
+    BACKPACK,
+    BIKE_LIGHT,
+    BOLT_T_SHIRT,
+    FLEECE_JACKET,
+)

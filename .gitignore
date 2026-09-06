@@ -26,5 +26,6 @@ reports/
 .idea/
 .DS_Store
 Thumbs.db
-*.xlsx
-!/SauceDemo_Manual_Test_Cases_Focused_With_Automation_Mapping.xlsx
+# Generated spreadsheet output. The published manual test suite is committed
+# at the repository root and is not covered by this rule.
+outputs/
