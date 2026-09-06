@@ -1,3 +1,4 @@
+import allure
 import pytest
 
 from pages.inventory_page import InventoryPage
@@ -5,6 +6,10 @@ from pages.inventory_page import InventoryPage
 pytestmark = [pytest.mark.inventory, pytest.mark.regression]
 
 
+@allure.epic("Product catalogue")
+@allure.feature("Sorting")
+@allure.story("Products sort by ascending price")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.sanity
 def test_inventory_sorts_products_by_price_low_to_high(
     logged_in_inventory_page: InventoryPage,
@@ -16,6 +21,10 @@ def test_inventory_sorts_products_by_price_low_to_high(
     assert displayed_prices == sorted(displayed_prices)
 
 
+@allure.epic("Product catalogue")
+@allure.feature("Sorting")
+@allure.story("Products sort by descending price")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.sanity
 def test_inventory_sorts_products_by_price_high_to_low(
     logged_in_inventory_page: InventoryPage,
@@ -27,6 +36,10 @@ def test_inventory_sorts_products_by_price_high_to_low(
     assert displayed_prices == sorted(displayed_prices, reverse=True)
 
 
+@allure.epic("Product catalogue")
+@allure.feature("Sorting")
+@allure.story("Products sort by name")
+@allure.severity(allure.severity_level.NORMAL)
 @pytest.mark.sanity
 def test_inventory_sorts_products_by_name(
     logged_in_inventory_page: InventoryPage,

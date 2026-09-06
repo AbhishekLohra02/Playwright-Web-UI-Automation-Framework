@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - main
+  schedule:
+    # Nightly regression at 02:00 UTC. SauceDemo is a third-party dependency,
+    # so breakage between pull requests must still be caught.
+    - cron: "0 2 * * *"
   workflow_dispatch:
 
 permissions:
@@ -66,7 +70,20 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
 
-      - name: Install Chromium and system dependencies
+      - name: Resolve Playwright version
+        id: playwright
+        run: |
+          version=$(python -c "import importlib.metadata as m; print(m.version('playwright'))")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.playwright.outputs.version }}
+
+      - name: Install Chromium
         run: python -m playwright install --with-deps chromium
 
       - name: Run automated tests
@@ -74,9 +91,29 @@ jobs:
           mkdir -p reports test-results
           python -m pytest \
             --browser chromium \
+            --numprocesses auto \
             --junitxml=test-results/junit.xml \
             --html=reports/report.html \
             --self-contained-html
+
+      - name: Publish results to the job summary
+        if: ${{ !cancelled() }}
+        run: python scripts/junit_summary.py test-results/junit.xml >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up Java for the Allure report
+        if: ${{ !cancelled() }}
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Generate the Allure report
+        if: ${{ !cancelled() }}
+        run: |
+          curl -sSLo allure.tgz \
+            https://github.com/allure-framework/allure2/releases/download/2.35.1/allure-2.35.1.tgz
+          tar -xzf allure.tgz
+          ./allure-2.35.1/bin/allure generate allure-results --clean -o allure-report
 
       - name: Upload test artifacts
         if: ${{ !cancelled() }}
@@ -84,6 +121,8 @@ jobs:
         with:
           name: playwright-test-artifacts
           path: |
+            allure-report/
+            allure-results/
             reports/
             test-results/
           if-no-files-found: warn

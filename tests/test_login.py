@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -8,6 +9,10 @@ from test_data.users import PASSWORD, STANDARD_USERNAME
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@allure.epic("Authentication")
+@allure.feature("Sign in")
+@allure.story("The standard account reaches the catalogue")
+@allure.severity(allure.severity_level.BLOCKER)
 @pytest.mark.smoke
 @pytest.mark.sanity
 def test_successful_login_with_standard_user(login_page: LoginPage) -> None:

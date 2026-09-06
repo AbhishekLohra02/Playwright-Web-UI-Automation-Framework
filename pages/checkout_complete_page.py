@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page
 
 from pages.base_page import AuthenticatedPage
@@ -12,5 +13,6 @@ class CheckoutCompletePage(AuthenticatedPage):
         self.complete_text = page.get_by_test_id("complete-text")
         self.back_home_button = page.get_by_test_id("back-to-products")
 
+    @allure.step("Return to the product catalogue")
     def back_home(self) -> None:
         self.back_home_button.click()

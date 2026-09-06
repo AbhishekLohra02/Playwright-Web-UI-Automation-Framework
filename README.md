@@ -15,6 +15,8 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 - Playwright 1.61.0
 - pytest-playwright 0.8.0
 - pytest-html 4.2.0
+- pytest-xdist 3.8.0 for parallel execution
+- allure-pytest 2.16.0 for reporting
 - Ruff 0.14.5 for linting and formatting
 - Page Object Model
 
@@ -22,14 +24,24 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 
 | Module | Automated coverage | Executions |
 |---|---|---:|
-| Login | Successful login, locked-out user, invalid credentials, required fields, unauthenticated access guard, logout | 10 |
+| Login | Every accepted account signs in, locked-out account refused, invalid credentials, case and whitespace exactness, injection and oversized input, required fields, error dismissal and retry, keyboard submit, masked password, sign-in performance budget | 31 |
+| Session | Unauthenticated URL access, logout, browser-Back after logout | (included above) |
 | Inventory | Sorting by price (both directions) and by name | 3 |
 | Cart | Retain multiple products, remove a selected product, continue shopping | 3 |
 | Checkout | Successful order, order confirmation and emptied cart, Item Total, tax and payable total, required customer information | 7 |
-| **Total** | | **23** |
+| **Total** | | **44** |
 
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.
+
+## Test strategy and defects
+
+- [Test strategy](./docs/TEST_STRATEGY.md) — risk-based scope, test levels, the
+  SauceDemo account matrix, execution and reporting policy, and why line
+  coverage is deliberately not published.
+- [Defect log](./docs/DEFECT_LOG.md) — application defects found against the
+  live site while building this suite, including a floating-point leak in the
+  checkout Item Total that affects `standard_user`.
 
 ## Manual test documentation
 
@@ -60,6 +72,11 @@ SauceDemo_Test_Automation/
 |   |-- customers.py
 |   `-- messages.py
 |-- tests/                  # Independent Pytest scenarios
+|-- docs/                   # Test strategy and defect log
+|   |-- TEST_STRATEGY.md
+|   `-- DEFECT_LOG.md
+|-- scripts/                # CI helpers
+|   `-- junit_summary.py    # Renders JUnit results as a GitHub job summary
 |-- conftest.py             # Shared fixtures and test setup
 |-- pytest.ini              # Pytest discovery, base URL, and output options
 |-- ruff.toml               # Lint and formatting rules
@@ -164,6 +181,13 @@ Run a single test category using markers:
 ```bash
 python -m pytest -m smoke
 python -m pytest -m "checkout and not smoke"
+python -m pytest -m login
+```
+
+Run the suite in parallel:
+
+```bash
+python -m pytest --numprocesses auto
 ```
 
 Run against a different environment without editing code:
@@ -176,6 +200,21 @@ python -m pytest --base-url https://www.saucedemo.com/
 short tracebacks, strict markers, and failure-only traces and screenshots.
 Because tracing and screenshots are configured there rather than in CI, a local
 failure produces the same artifacts a CI failure does, under `test-results/`.
+
+## Allure reporting
+
+Every run writes Allure results to `allure-results/`. Allure Report is open
+source and free; only the separate Allure TestOps product is commercial.
+
+Install the CLI once (it needs a JRE), then generate and open the report:
+
+```bash
+allure serve allure-results
+```
+
+Tests carry `epic`, `feature`, `story` and `severity` labels, page-object
+actions are recorded as steps, and a failing test attaches the URL and a
+full-page screenshot taken at the moment of failure.
 
 ## Code quality
 
@@ -196,10 +235,19 @@ Ruff and then the complete Chromium suite automatically on:
 
 - Pushes to `main`
 - Pull requests targeting `main`
+- A nightly schedule at 02:00 UTC, because SauceDemo is a third-party
+  dependency that can break between pull requests
 - Manual workflow execution
+
+The pipeline runs Ruff first, then the UI suite in parallel with
+`--numprocesses auto`, with the Playwright browser binaries cached between runs.
+A pass/fail table is written to the workflow summary page, so results are
+readable without downloading anything.
 
 Each CI run creates one downloadable `playwright-test-artifacts` archive containing:
 
+- `allure-report/`: the generated Allure report
+- `allure-results/`: raw Allure results, for merging trend history
 - `reports/report.html`: portable, self-contained HTML test report
 - `test-results/junit.xml`: machine-readable test results
 - Playwright traces and screenshots retained when tests fail
@@ -335,7 +383,6 @@ the manual suite due to the assignment time constraint.
 
 ## Future improvements
 
-- Parallel execution with `pytest-xdist`
-- Cross-browser matrix and a scheduled nightly regression run
-- Cached Playwright browser binaries in CI
-- Historical test-result dashboard and trend analysis
+- Cross-browser matrix covering Firefox and WebKit
+- Allure trend history published to GitHub Pages
+- Layered smoke-then-regression CI gates

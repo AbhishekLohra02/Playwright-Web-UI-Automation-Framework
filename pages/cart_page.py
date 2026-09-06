@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Locator, Page
 
 from pages.base_page import AuthenticatedPage
@@ -18,13 +19,16 @@ class CartPage(AuthenticatedPage):
             has=self.page.get_by_text(product_name, exact=True)
         )
 
+    @allure.step("Remove '{product_name}' from the cart")
     def remove_product(self, product_name: str) -> None:
         self.cart_item(product_name).get_by_role(
             "button", name="Remove", exact=True
         ).click()
 
+    @allure.step("Start checkout")
     def start_checkout(self) -> None:
         self.checkout_button.click()
 
+    @allure.step("Continue shopping")
     def continue_shopping(self) -> None:
         self.continue_shopping_button.click()

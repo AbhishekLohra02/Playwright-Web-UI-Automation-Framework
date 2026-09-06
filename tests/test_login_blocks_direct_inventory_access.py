@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import Page, expect
 
@@ -8,6 +9,10 @@ from test_data.messages import INVENTORY_REQUIRES_LOGIN
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@allure.epic("Authentication")
+@allure.feature("Session handling")
+@allure.story("The catalogue is not reachable unauthenticated")
+@allure.severity(allure.severity_level.BLOCKER)
 @pytest.mark.smoke
 @pytest.mark.sanity
 def test_inventory_is_not_reachable_without_logging_in(page: Page) -> None:

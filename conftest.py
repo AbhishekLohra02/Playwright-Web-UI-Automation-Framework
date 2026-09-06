@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import Page
 
@@ -9,6 +10,19 @@ from pages.login_page import LoginPage
 from test_data.customers import FIRST_NAME, LAST_NAME, POSTAL_CODE
 from test_data.products import CART_PRODUCTS
 from test_data.users import PASSWORD, STANDARD_USERNAME
+
+
+def pytest_configure(config: pytest.Config) -> None:
+    """Make the `base_url` ini value reach pytest-xdist workers.
+
+    pytest-base-url skips its own configure hook on worker nodes, so under
+    `-n auto` the ini value never reaches the Playwright browser context and
+    every relative navigation fails. Copying it here keeps parallel runs
+    behaving exactly like serial ones, while still allowing --base-url and
+    PYTEST_BASE_URL to win.
+    """
+    if config.getoption("base_url") is None:
+        config.option.base_url = config.getini("base_url")
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -56,3 +70,33 @@ def checkout_overview_page(
     checkout_information_page.enter_details(FIRST_NAME, LAST_NAME, POSTAL_CODE)
     checkout_information_page.click_continue()
     return CheckoutOverviewPage(checkout_information_page.page)
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item, call):
+    """Attach the failing browser state to the Allure report.
+
+    A screenshot and the URL at the moment of failure remove most of the
+    guesswork when triaging a red build, especially one that only reproduces
+    on CI.
+    """
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when != "call" or not report.failed:
+        return
+
+    page = item.funcargs.get("page")
+    if page is None or page.is_closed():
+        return
+
+    allure.attach(
+        page.url,
+        name="URL at failure",
+        attachment_type=allure.attachment_type.TEXT,
+    )
+    allure.attach(
+        page.screenshot(full_page=True),
+        name="Screenshot at failure",
+        attachment_type=allure.attachment_type.PNG,
+    )

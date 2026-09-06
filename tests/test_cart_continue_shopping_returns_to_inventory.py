@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -8,6 +9,10 @@ from test_data.products import CART_PRODUCTS
 pytestmark = [pytest.mark.cart, pytest.mark.regression]
 
 
+@allure.epic("Shopping cart")
+@allure.feature("Navigation")
+@allure.story("Continue shopping preserves the cart")
+@allure.severity(allure.severity_level.NORMAL)
 def test_cart_continue_shopping_keeps_selected_products(
     cart_with_products: CartPage,
 ) -> None:

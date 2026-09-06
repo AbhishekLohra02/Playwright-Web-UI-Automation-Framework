@@ -1,3 +1,4 @@
+import allure
 from playwright.sync_api import Page, expect
 
 
@@ -14,10 +15,12 @@ class BasePage:
         self.page = page
 
     def open(self) -> None:
-        self.page.goto(self.url_path)
+        with allure.step(f"Open {self.url_path}"):
+            self.page.goto(self.url_path)
 
     def expect_loaded(self) -> None:
-        expect(self.page).to_have_url(self.url_path)
+        with allure.step(f"Wait for {self.url_path}"):
+            expect(self.page).to_have_url(self.url_path)
 
 
 class AuthenticatedPage(BasePage):
@@ -30,10 +33,18 @@ class AuthenticatedPage(BasePage):
         self.cart_badge = page.get_by_test_id("shopping-cart-badge")
         self.menu_button = page.get_by_role("button", name="Open Menu")
         self.logout_link = page.get_by_test_id("logout-sidebar-link")
+        self.reset_link = page.get_by_test_id("reset-sidebar-link")
 
+    @allure.step("Open the shopping cart")
     def open_cart(self) -> None:
         self.cart_link.click()
 
+    @allure.step("Log out")
     def logout(self) -> None:
         self.menu_button.click()
         self.logout_link.click()
+
+    @allure.step("Reset the application state")
+    def reset_app_state(self) -> None:
+        self.menu_button.click()
+        self.reset_link.click()

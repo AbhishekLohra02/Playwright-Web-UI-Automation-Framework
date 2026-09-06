@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import allure
 from playwright.sync_api import Locator, Page, expect
 
 from pages.base_page import AuthenticatedPage
@@ -43,8 +44,10 @@ class CheckoutOverviewPage(AuthenticatedPage):
         expect(self.total_label).to_be_visible()
         return parse_price(self.total_label.inner_text())
 
+    @allure.step("Finish the order")
     def finish_checkout(self) -> None:
         self.finish_button.click()
 
+    @allure.step("Cancel the order")
     def cancel_checkout(self) -> None:
         self.cancel_button.click()

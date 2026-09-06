@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -9,6 +10,10 @@ pytestmark = [pytest.mark.cart, pytest.mark.regression]
 REMAINING_PRODUCTS = len(CART_PRODUCTS) - 1
 
 
+@allure.epic("Shopping cart")
+@allure.feature("Cart contents")
+@allure.story("A product can be removed")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.sanity
 def test_cart_removes_selected_product(cart_with_products: CartPage) -> None:
     expect(cart_with_products.cart_items).to_have_count(len(CART_PRODUCTS))

@@ -9,6 +9,8 @@ __pycache__/
 .pytest_cache/
 
 # Playwright and test artifacts
+allure-results/
+allure-report/
 test-results/
 playwright-report/
 traces/

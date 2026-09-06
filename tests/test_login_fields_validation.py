@@ -1,3 +1,4 @@
+import allure
 import pytest
 from playwright.sync_api import expect
 
@@ -8,6 +9,10 @@ from test_data.users import PASSWORD, STANDARD_USERNAME
 pytestmark = [pytest.mark.login, pytest.mark.regression]
 
 
+@allure.epic("Authentication")
+@allure.feature("Sign in")
+@allure.story("Required fields are enforced")
+@allure.severity(allure.severity_level.CRITICAL)
 @pytest.mark.sanity
 @pytest.mark.parametrize(
     ("username", "password", "expected_error"),

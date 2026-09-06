@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+import allure
 from playwright.sync_api import Locator, Page, expect
 
 from pages.base_page import AuthenticatedPage
@@ -31,16 +32,19 @@ class InventoryPage(AuthenticatedPage):
             has=self.page.get_by_text(product_name, exact=True)
         )
 
+    @allure.step("Add '{product_name}' to the cart")
     def add_product_to_cart(self, product_name: str) -> None:
         self.product_card(product_name).get_by_role(
             "button", name="Add to cart"
         ).click()
 
+    @allure.step("Remove '{product_name}' from the cart")
     def remove_product_from_cart(self, product_name: str) -> None:
         self.product_card(product_name).get_by_role(
             "button", name="Remove", exact=True
         ).click()
 
+    @allure.step("Sort products by '{option_label}'")
     def sort_products_by(self, option_label: str) -> None:
         self.sort_dropdown.select_option(label=option_label)
 
