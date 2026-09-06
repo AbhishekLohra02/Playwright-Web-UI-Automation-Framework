@@ -31,6 +31,22 @@ MALICIOUS_CREDENTIALS = [
 ]
 
 
+def _expect_credentials_refused(
+    login_page: LoginPage, username: str, password: str
+) -> None:
+    """Submit credentials and assert the generic refusal.
+
+    The two tests below stay separate because they answer different questions
+    and trace to different manual cases, but the expected outcome is identical:
+    the same message, on the same page, every time.
+    """
+    login_page.login(username, password)
+
+    expect(login_page.error_message).to_be_visible()
+    expect(login_page.error_message).to_have_text(INVALID_CREDENTIALS)
+    login_page.expect_loaded()
+
+
 @pytest.mark.manual_case("TC-AUTH-003", "TC-AUTH-010")
 @allure.feature("Sign in")
 @allure.story("Invalid credentials are rejected")
@@ -45,11 +61,7 @@ def test_login_rejects_invalid_credentials(
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
     """
-    login_page.login(username, password)
-
-    expect(login_page.error_message).to_be_visible()
-    expect(login_page.error_message).to_have_text(INVALID_CREDENTIALS)
-    login_page.expect_loaded()
+    _expect_credentials_refused(login_page, username, password)
 
 
 @pytest.mark.manual_case("TC-EXP-AUTH-001")
@@ -67,8 +79,4 @@ def test_login_rejects_malicious_input(
     proves the payload was not interpreted, and it avoids telling an attacker
     that their input was treated as special.
     """
-    login_page.login(username, password)
-
-    expect(login_page.error_message).to_be_visible()
-    expect(login_page.error_message).to_have_text(INVALID_CREDENTIALS)
-    login_page.expect_loaded()
+    _expect_credentials_refused(login_page, username, password)
