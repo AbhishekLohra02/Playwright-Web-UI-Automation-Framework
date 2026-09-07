@@ -1,0 +1,102 @@
+Found 3 accessibility violations:
+Rule Violated:
+landmark-one-main - Ensure the document has a main landmark
+	URL: https://dequeuniversity.com/rules/axe/4.12/landmark-one-main?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.semantics', 'best-practice']
+	Elements Affected:
+
+
+	1)	Target: html
+		Snippet: <html lang="en">
+		Messages:
+		* Document does not have a main landmark
+Rule Violated:
+page-has-heading-one - Ensure that the page, or at least one of its frames contains a level-one heading
+	URL: https://dequeuniversity.com/rules/axe/4.12/page-has-heading-one?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.semantics', 'best-practice']
+	Elements Affected:
+
+
+	1)	Target: html
+		Snippet: <html lang="en">
+		Messages:
+		* Page must have a level-one heading
+Rule Violated:
+region - Ensure all page content is contained by landmarks
+	URL: https://dequeuniversity.com/rules/axe/4.12/region?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.keyboard', 'best-practice', 'RGAAv4', 'RGAA-9.2.1']
+	Elements Affected:
+
+
+	1)	Target: .bm-icon
+		Snippet: <img class="bm-icon" alt="Open Menu" data-test="open-menu" style="width: 100%; height:..." srcset="data:image/svg+xml,%..." src="data:image/png;base6...">
+		Messages:
+		* Some page content is not contained by landmarks
+
+	2)	Target: .header_label
+		Snippet: <div class="header_label"><div class="app_logo">Swag Labs</div></div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	3)	Target: #shopping_cart_container
+		Snippet: <div id="shopping_cart_container" class="shopping_cart_container"><a class="shopping_cart_link" data-test="shopping-cart-link"><span class="shopping_cart_badge" data-test="shopping-cart-badge">2</span></a></div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	4)	Target: .header_secondary_container
+		Snippet: <div class="header_secondary_container" data-test="secondary-header"><span class="title" data-test="title">Your Cart</span></div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	5)	Target: .cart_quantity_label
+		Snippet: <div class="cart_quantity_label" data-test="cart-quantity-label">QTY</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	6)	Target: .cart_desc_label
+		Snippet: <div class="cart_desc_label" data-test="cart-desc-label">Description</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	7)	Target: .cart_item[data-test="inventory-item"]:nth-child(3) > .cart_quantity[data-test="item-quantity"]
+		Snippet: <div class="cart_quantity" data-test="item-quantity">1</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	8)	Target: #item_4_title_link
+		Snippet: <a href="#" id="item_4_title_link" data-test="item-4-title-link"><div class="inventory_item_name" data-test="inventory-item-name">Sauce Labs Backpack</div></a>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	9)	Target: .cart_item[data-test="inventory-item"]:nth-child(3) > .cart_item_label > .inventory_item_desc[data-test="inventory-item-desc"]
+		Snippet: <div class="inventory_item_desc" data-test="inventory-item-desc">carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	10)	Target: .cart_item[data-test="inventory-item"]:nth-child(3) > .cart_item_label > .item_pricebar > .inventory_item_price[data-test="inventory-item-price"]
+		Snippet: <div class="inventory_item_price" data-test="inventory-item-price">$29.99</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	11)	Target: .cart_item[data-test="inventory-item"]:nth-child(4) > .cart_quantity[data-test="item-quantity"]
+		Snippet: <div class="cart_quantity" data-test="item-quantity">1</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	12)	Target: #item_0_title_link
+		Snippet: <a href="#" id="item_0_title_link" data-test="item-0-title-link"><div class="inventory_item_name" data-test="inventory-item-name">Sauce Labs Bike Light</div></a>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	13)	Target: .cart_item[data-test="inventory-item"]:nth-child(4) > .cart_item_label > .inventory_item_desc[data-test="inventory-item-desc"]
+		Snippet: <div class="inventory_item_desc" data-test="inventory-item-desc">A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	14)	Target: .cart_item[data-test="inventory-item"]:nth-child(4) > .cart_item_label > .item_pricebar > .inventory_item_price[data-test="inventory-item-price"]
+		Snippet: <div class="inventory_item_price" data-test="inventory-item-price">$9.99</div>
+		Messages:
+		* Some page content is not contained by landmarks

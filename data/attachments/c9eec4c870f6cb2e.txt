@@ -1,0 +1,52 @@
+Found 3 accessibility violations:
+Rule Violated:
+landmark-one-main - Ensure the document has a main landmark
+	URL: https://dequeuniversity.com/rules/axe/4.12/landmark-one-main?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.semantics', 'best-practice']
+	Elements Affected:
+
+
+	1)	Target: html
+		Snippet: <html lang="en">
+		Messages:
+		* Document does not have a main landmark
+Rule Violated:
+page-has-heading-one - Ensure that the page, or at least one of its frames contains a level-one heading
+	URL: https://dequeuniversity.com/rules/axe/4.12/page-has-heading-one?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.semantics', 'best-practice']
+	Elements Affected:
+
+
+	1)	Target: html
+		Snippet: <html lang="en">
+		Messages:
+		* Page must have a level-one heading
+Rule Violated:
+region - Ensure all page content is contained by landmarks
+	URL: https://dequeuniversity.com/rules/axe/4.12/region?application=axeAPI
+	Impact Level: moderate
+	Tags: ['cat.keyboard', 'best-practice', 'RGAAv4', 'RGAA-9.2.1']
+	Elements Affected:
+
+
+	1)	Target: .login_logo
+		Snippet: <div class="login_logo">Swag Labs</div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	2)	Target: .form_group:nth-child(1)
+		Snippet: <div class="form_group"><input class="input_error form_input" placeholder="Username" data-test="username" id="user-name" autocorrect="off" autocapitalize="none" type="text" value="" name="user-name"></div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	3)	Target: .form_group:nth-child(2)
+		Snippet: <div class="form_group"><input class="input_error form_input" placeholder="Password" data-test="password" id="password" autocorrect="off" autocapitalize="none" type="password" value="" name="password"></div>
+		Messages:
+		* Some page content is not contained by landmarks
+
+	4)	Target: .login_credentials_wrap
+		Snippet: <div class="login_credentials_wrap" data-test="login-credentials-container">
+		Messages:
+		* Some page content is not contained by landmarks
