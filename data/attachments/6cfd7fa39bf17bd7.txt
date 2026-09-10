@@ -1,0 +1,2 @@
+standard_user: 0.39s
+performance_glitch_user: 5.27s
