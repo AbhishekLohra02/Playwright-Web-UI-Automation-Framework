@@ -151,8 +151,11 @@ fail the build**; moderate and minor findings are attached to the Allure report
 and tracked in the defect log, because blocking on structural landmark warnings
 would stall delivery over issues that stop nobody completing a purchase.
 
-Login, cart and checkout are clean at that gate. The inventory page is not:
-SD-007, an unlabelled sort control, is pinned as a strict xfail.
+All four screens are clean at that gate. The inventory page was not: SD-007, an
+unlabelled sort control, was pinned as a strict xfail until SauceDemo shipped
+`aria-label="Sort products"`, at which point the strict marker failed the build
+with `XPASS(strict)` and the marker was removed. Pinning a defect rather than
+skipping the test is what makes an upstream fix visible.
 
 ## Coverage
 

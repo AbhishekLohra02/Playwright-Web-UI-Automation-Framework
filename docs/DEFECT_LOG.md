@@ -99,9 +99,10 @@ page contradicts itself until a reload.
 
 ---
 
-## SD-007 — The product sort dropdown has no accessible name
+## SD-007 — The product sort dropdown has no accessible name — FIXED
 
 **Severity:** Major  **Area:** Product catalogue  **Account:** all
+**Status:** fixed upstream, verified 2026-09-16
 
 axe-core reports a **critical** `select-name` violation on the inventory page:
 the sort `<select>` carries no label, `aria-label` or `aria-labelledby`, so a
@@ -112,11 +113,18 @@ controls or what the current selection means.
 `/inventory.html`.
 
 **Expected:** the control exposes an accessible name such as "Sort products".
-**Actual:** critical `select-name` violation, 1 node.
+**Actual (when raised):** critical `select-name` violation, 1 node.
+
+**Resolution.** SauceDemo now ships
+`<select class="product_sort_container" aria-label="Sort products">`, and
+axe-core reports no critical or serious violation on the inventory page. The
+strict xfail reported the fix by failing with `XPASS(strict)`, and the marker
+has been removed. The same deploy added `role="button"` and an `aria-label` to
+each row's image and title links, which is what broke `ProductCollection.button_for`.
 
 Login, cart and checkout information are free of critical and serious
 violations. All four screens share three moderate structural findings —
 `landmark-one-main`, `page-has-heading-one` and `region` — which are recorded
 but do not fail the build.
 
-**Covered by:** `tests/test_accessibility.py`, marked `xfail(strict=True)`.
+**Covered by:** `tests/test_accessibility.py`, now a plain passing assertion.

@@ -34,10 +34,11 @@ Automation focuses on stable, business-critical Login, Cart, and Checkout flows.
 | Accessibility | axe-core scans of login, catalogue, cart and checkout | 4 |
 | **Total** | | **60** |
 
-Three of those are `xfail(strict=True)`, pinning application defects SD-001,
-SD-006 and SD-007 from the [defect log](./docs/DEFECT_LOG.md). Strict marking
-means that if SauceDemo ever fixes them, the suite fails and tells us to remove
-the marker.
+Two of those are `xfail(strict=True)`, pinning application defects SD-001 and
+SD-006 from the [defect log](./docs/DEFECT_LOG.md). Strict marking means that if
+SauceDemo ever fixes them, the suite fails and tells us to remove the marker.
+That is not theoretical: SD-007, an unlabelled sort control, was pinned the same
+way until SauceDemo labelled it, and the marker reported the fix by failing.
 
 The automated suite uses representative products and data-driven scenarios rather
 than repeating identical behavior for every product or user.

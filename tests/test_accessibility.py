@@ -64,20 +64,14 @@ def test_checkout_information_has_no_blocking_accessibility_violations(
 @allure.feature("Accessibility")
 @allure.story("The catalogue has no blocking accessibility defects")
 @pytest.mark.manual_case("TC-UI-004")
-@pytest.mark.xfail(
-    strict=True,
-    reason=(
-        "SD-007: the product sort dropdown has no accessible name, a critical "
-        "axe-core `select-name` violation"
-    ),
-)
 def test_inventory_page_has_no_blocking_accessibility_violations(
     logged_in_inventory_page: InventoryPage, accessibility_scan: Scan
 ) -> None:
-    """The sort control is unusable with a screen reader.
+    """The catalogue is clean at the blocking gate.
 
-    Marked strict so that adding a label upstream turns this green and tells us
-    to drop the marker, rather than the defect quietly persisting.
+    It was not: SD-007 pinned the unlabelled sort control as a strict xfail
+    until SauceDemo labelled it. The strict marker reported the fix by failing,
+    which is what it was there to do.
     """
     violations = accessibility_scan("Inventory")
 

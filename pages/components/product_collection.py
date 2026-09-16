@@ -28,8 +28,15 @@ class ProductCollection:
         return self.rows.filter(has=self.page.get_by_text(product_name, exact=True))
 
     def button_for(self, product_name: str) -> Locator:
-        """A row's action button, whose label flips between Add and Remove."""
-        return self.row(product_name).get_by_role("button")
+        """A row's action button, whose label flips between Add and Remove.
+
+        Matched on the `button` tag rather than the ARIA button role: the row's
+        image and title links also carry `role="button"`, so the role matches
+        three elements. Every other locator here reaches a button by its
+        accessible name, which is not available to this one because the name is
+        the very thing its callers assert on.
+        """
+        return self.row(product_name).locator("button")
 
     def names(self) -> list[str]:
         expect(self.name_labels.first).to_be_visible()
