@@ -1,514 +1,514 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","146","test_login_can_be_submitted_with_the_enter_key[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","205","test_locked_out_user_login[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_locked_out_user_login","",""
-"","1298","test_logout_ends_the_session_and_blocks_the_inventory[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_logout_ends_session","",""
-"A customer who backs out at the last step must not lose their basket.
-
-    Silently emptying the cart on cancel would cost the sale outright, which
-    makes this a revenue check rather than a navigation one.
-    ","143","test_cancel_from_the_order_overview_keeps_the_cart[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"","389","test_inventory_is_not_reachable_without_logging_in[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_blocks_direct_inventory_access","",""
-"","263","test_cart_continue_shopping_keeps_selected_products[webkit]","tests","2026-10-26","passed","2026-10-26","","test_cart_continue_shopping_returns_to_inventory","",""
-"","410","test_standard_user_signs_in_within_budget[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_performance_budget","",""
-"","397","test_error_state_is_cleared_on_a_fresh_visit[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","246","test_login_rejects_invalid_credentials[chromium-username_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","281","test_login_page_lists_every_accepted_account[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"Prove the harness can actually detect a slow sign-in.
-
-    Comparing the two accounts in one browser session makes this a relative
-    measurement, so it stays meaningful on a loaded CI runner where an absolute
-    threshold would be flaky.
-    ","6470","test_performance_glitch_user_sign_in_is_measurably_slower[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_performance_budget","",""
-"","163","test_login_required_field_validation[firefox-username_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"The catalogue is clean at the blocking gate.
-
-    It was not: SD-007 pinned the unlabelled sort control as a strict xfail
-    until SauceDemo labelled it. The strict marker reported the fix by failing,
-    which is what it was there to do.
-    ","1003","test_inventory_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"A user who mistypes a password must be able to recover in place.","645","test_error_can_be_dismissed_and_login_retried[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","112","test_inventory_sorts_products_by_price_low_to_high[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"The catalogue's own Remove button is a separate control from the cart's.","611","test_product_can_be_removed_without_opening_the_cart[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
-"","688","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","281","test_checkout_validates_required_customer_information[webkit-missing_postal_code]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"","874","test_product_can_be_added_to_the_cart_from_its_detail_page[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","41","test_password_is_masked[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","890","test_login_rejects_invalid_credentials[firefox-both_invalid]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","240","test_checkout_calculates_item_total_for_selected_products[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_item_total_for_selected_products","",""
-"","234","test_inventory_sorts_products_by_price_low_to_high[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","245","test_login_rejects_malicious_input[webkit-oversized_input]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"The reset leaves the page contradicting itself.
-
-    The badge and the cart are cleared, but every button a customer can see
-    still offers to remove a product that is no longer in their cart. Marked
-    strict so a fix upstream is noticed rather than silently absorbed.
-    ","11374","test_reset_app_state_restores_the_add_to_cart_buttons[firefox]","tests","2026-10-26","skipped","2026-10-26","","test_inventory_state_management","",""
-"","323","test_cart_removes_selected_product[webkit]","tests","2026-10-26","passed","2026-10-26","","test_cart_removes_selected_product","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","119","test_login_rejects_malicious_input[chromium-oversized_input]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","457","test_accepted_users_reach_the_inventory[webkit-visual_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","149","test_cancel_from_customer_information_returns_to_the_cart[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","448","test_accepted_users_reach_the_inventory[firefox-visual_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","314","test_checkout_validates_required_customer_information[firefox-missing_last_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","423","test_accepted_users_reach_the_inventory[webkit-problem_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","561","test_inventory_is_not_reachable_without_logging_in[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_blocks_direct_inventory_access","",""
-"","196","test_login_can_be_submitted_with_the_enter_key[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","546","test_login_rejects_invalid_credentials[firefox-wrong_password]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","122","test_cancel_from_customer_information_returns_to_the_cart[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","5592","test_accepted_users_reach_the_inventory[webkit-performance_glitch_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","151","test_cart_retains_multiple_products[webkit]","tests","2026-10-26","passed","2026-10-26","","test_cart_retains_multiple_products","",""
-"","306","test_inventory_sorts_products_by_name[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"","646","test_reset_app_state_empties_the_cart[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
-"","372","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","151","test_checkout_calculates_item_total_for_selected_products[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_item_total_for_selected_products","",""
-"A customer who backs out at the last step must not lose their basket.
-
-    Silently emptying the cart on cancel would cost the sale outright, which
-    makes this a revenue check rather than a navigation one.
-    ","121","test_cancel_from_the_order_overview_keeps_the_cart[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"","324","test_completed_order_empties_the_cart[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
-"","90","test_order_overview_lists_every_selected_product[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"","135","test_inventory_sorts_products_by_price_high_to_low[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"","471","test_checkout_information_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"","1166","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","280","test_checkout_completes_order_successfully[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
-"","560","test_checkout_validates_required_customer_information[firefox-missing_postal_code]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"","204","test_inventory_sorts_products_by_name[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","5453","test_accepted_users_reach_the_inventory[firefox-performance_glitch_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","86","test_checkout_completes_order_successfully[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
-"","261","test_successful_login_with_standard_user[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login","",""
-"","51","test_order_overview_lists_every_selected_product[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","211","test_login_rejects_invalid_credentials[firefox-unknown_username]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","114","test_login_required_field_validation[chromium-password_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"The catalogue is clean at the blocking gate.
-
-    It was not: SD-007 pinned the unlabelled sort control as a strict xfail
-    until SauceDemo labelled it. The strict marker reported the fix by failing,
-    which is what it was there to do.
-    ","896","test_inventory_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"","103","test_login_page_lists_every_accepted_account[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","833","test_cart_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"","475","test_completed_order_empties_the_cart[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
-"","372","test_product_can_be_removed_from_its_detail_page[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","106","test_checkout_validates_required_customer_information[chromium-missing_last_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"","446","test_login_required_field_validation[webkit-password_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"","303","test_product_can_be_removed_from_its_detail_page[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
 "Sign-in is the one screen nobody can route around.
 
     Critical and serious findings fail; moderate structural findings are
     attached to the report but do not block, because they do not stop anyone
     completing the journey.
-    ","803","test_login_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"","685","test_checkout_information_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
+    ","870","test_login_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","536","test_reset_app_state_empties_the_cart[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","649","test_login_rejects_invalid_credentials[webkit-wrong_password]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
 "Pin SD-001 to a product combination that reproduces it.
 
     Marked strict, so if SauceDemo ever rounds the subtotal correctly this test
     starts passing and the suite fails, telling us the defect is fixed and the
     marker should be removed.
-    ","11677","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[webkit]","tests","2026-10-26","skipped","2026-10-26","","test_checkout_item_total_formatting","",""
+    ","11008","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[webkit]","tests","2026-10-27","skipped","2026-10-27","","test_checkout_item_total_formatting","",""
+"","508","test_login_required_field_validation[webkit-username_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","512","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","438","test_successful_login_with_standard_user[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login","",""
+"","1291","test_logout_ends_the_session_and_blocks_the_inventory[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_logout_ends_session","",""
 "Injection-style input is refused with the ordinary failure message.
 
     Returning the same generic error for hostile input matters twice over: it
     proves the payload was not interpreted, and it avoids telling an attacker
     that their input was treated as special.
-    ","319","test_login_rejects_malicious_input[firefox-script_injection]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","435","test_locked_out_user_login[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_locked_out_user_login","",""
-"","183","test_checkout_completes_order_successfully[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
+    ","395","test_login_rejects_malicious_input[firefox-oversized_input]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","1328","test_reset_app_state_empties_the_cart[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","421","test_accepted_users_reach_the_inventory[firefox-visual_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","328","test_accepted_users_reach_the_inventory[chromium-standard_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","466","test_checkout_validates_required_customer_information[webkit-missing_first_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"","483","test_checkout_information_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","238","test_locked_out_user_login[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_locked_out_user_login","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","561","test_accepted_users_reach_the_inventory[webkit-problem_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","712","test_product_can_be_removed_from_its_detail_page[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","324","test_checkout_validates_required_customer_information[firefox-missing_first_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","558","test_accepted_users_reach_the_inventory[firefox-standard_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","5345","test_accepted_users_reach_the_inventory[chromium-performance_glitch_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","246","test_login_rejects_invalid_credentials[firefox-username_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","354","test_product_can_be_added_to_the_cart_from_its_detail_page[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"The reset leaves the page contradicting itself.
-
-    The badge and the cart are cleared, but every button a customer can see
-    still offers to remove a product that is no longer in their cart. Marked
-    strict so a fix upstream is noticed rather than silently absorbed.
-    ","11108","test_reset_app_state_restores_the_add_to_cart_buttons[chromium]","tests","2026-10-26","skipped","2026-10-26","","test_inventory_state_management","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","456","test_login_rejects_malicious_input[webkit-script_injection]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","93","test_checkout_calculates_item_total_for_selected_products[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_item_total_for_selected_products","",""
-"The detail page is where a customer decides to buy.
-
-    A price that disagrees with the catalogue listing is a pricing defect, so
-    the price is compared against the known catalogue value rather than against
-    whatever the previous screen happened to show.
-    ","791","test_product_detail_matches_the_catalogue_entry[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
+    ","333","test_login_rejects_invalid_credentials[chromium-password_off_by_one]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","237","test_inventory_sorts_products_by_price_high_to_low[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
 "Prove the harness can actually detect a slow sign-in.
 
     Comparing the two accounts in one browser session makes this a relative
     measurement, so it stays meaningful on a loaded CI runner where an absolute
     threshold would be flaky.
-    ","1158","test_performance_glitch_user_sign_in_is_measurably_slower[chromium]","tests","2026-10-26","failed","2026-10-26","","test_login_performance_budget","",""
+    ","6428","test_performance_glitch_user_sign_in_is_measurably_slower[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_performance_budget","",""
+"","48","test_order_overview_lists_every_selected_product[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
+"Pin SD-001 to a product combination that reproduces it.
+
+    Marked strict, so if SauceDemo ever rounds the subtotal correctly this test
+    starts passing and the suite fails, telling us the defect is fixed and the
+    marker should be removed.
+    ","10954","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[firefox]","tests","2026-10-27","skipped","2026-10-27","","test_checkout_item_total_formatting","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","123","test_login_rejects_invalid_credentials[chromium-unknown_username]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","457","test_login_rejects_invalid_credentials[webkit-unknown_username]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","114","test_cart_removes_selected_product[chromium]","tests","2026-10-27","passed","2026-10-27","","test_cart_removes_selected_product","",""
+"","284","test_login_required_field_validation[chromium-password_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","165","test_login_rejects_invalid_credentials[chromium-password_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","52","test_checkout_calculates_tax_and_payable_total[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_tax_and_total","",""
-"Credentials must match exactly.
+    ","462","test_login_rejects_invalid_credentials[firefox-unknown_username]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Prove the harness can actually detect a slow sign-in.
 
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","213","test_login_rejects_invalid_credentials[chromium-password_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","475","test_login_rejects_invalid_credentials[webkit-username_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"The reset leaves the page contradicting itself.
-
-    The badge and the cart are cleared, but every button a customer can see
-    still offers to remove a product that is no longer in their cart. Marked
-    strict so a fix upstream is noticed rather than silently absorbed.
-    ","11384","test_reset_app_state_restores_the_add_to_cart_buttons[webkit]","tests","2026-10-26","skipped","2026-10-26","","test_inventory_state_management","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","195","test_accepted_users_reach_the_inventory[firefox-problem_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","29","test_password_is_masked[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","302","test_login_required_field_validation[webkit-both_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"","101","test_checkout_validates_required_customer_information[chromium-missing_postal_code]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"","180","test_login_can_be_submitted_with_the_enter_key[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","143","test_standard_user_signs_in_within_budget[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_performance_budget","",""
-"","145","test_cart_continue_shopping_keeps_selected_products[chromium]","tests","2026-10-26","passed","2026-10-26","","test_cart_continue_shopping_returns_to_inventory","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","292","test_login_rejects_invalid_credentials[firefox-password_off_by_one]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"Sign-in is the one screen nobody can route around.
-
-    Critical and serious findings fail; moderate structural findings are
-    attached to the report but do not block, because they do not stop anyone
-    completing the journey.
-    ","551","test_login_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"A customer who backs out at the last step must not lose their basket.
-
-    Silently emptying the cart on cancel would cost the sale outright, which
-    makes this a revenue check rather than a navigation one.
-    ","203","test_cancel_from_the_order_overview_keeps_the_cart[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"","201","test_inventory_sorts_products_by_price_high_to_low[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"","192","test_standard_user_signs_in_within_budget[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_performance_budget","",""
-"","355","test_successful_login_with_standard_user[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login","",""
-"","1167","test_logout_ends_the_session_and_blocks_the_inventory[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_logout_ends_session","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","490","test_login_rejects_invalid_credentials[firefox-password_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","198","test_completed_order_empties_the_cart[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_completes_order_successfully","",""
-"","208","test_product_can_be_added_to_the_cart_from_its_detail_page[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"","144","test_login_required_field_validation[chromium-both_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"","572","test_checkout_information_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"","29","test_order_overview_lists_every_selected_product[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"","410","test_login_required_field_validation[firefox-password_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"","146","test_inventory_sorts_products_by_name[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"","114","test_cart_removes_selected_product[chromium]","tests","2026-10-26","passed","2026-10-26","","test_cart_removes_selected_product","",""
-"","213","test_inventory_sorts_products_by_price_high_to_low[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
+    Comparing the two accounts in one browser session makes this a relative
+    measurement, so it stays meaningful on a loaded CI runner where an absolute
+    threshold would be flaky.
+    ","1207","test_performance_glitch_user_sign_in_is_measurably_slower[chromium]","tests","2026-10-27","failed","2026-10-27","","test_login_performance_budget","",""
+"","269","test_product_can_be_added_to_the_cart_from_its_detail_page[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","183","test_checkout_completes_order_successfully[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
 "Injection-style input is refused with the ordinary failure message.
 
     Returning the same generic error for hostile input matters twice over: it
     proves the payload was not interpreted, and it avoids telling an attacker
     that their input was treated as special.
-    ","597","test_login_rejects_malicious_input[webkit-sql_injection_attempt]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","337","test_login_rejects_malicious_input[firefox-script_injection]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","603","test_checkout_information_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","121","test_checkout_validates_required_customer_information[chromium-missing_postal_code]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","109","test_login_rejects_invalid_credentials[chromium-both_invalid]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","815","test_login_rejects_invalid_credentials[webkit-username_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","638","test_inventory_is_not_reachable_without_logging_in[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_blocks_direct_inventory_access","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","300","test_login_rejects_malicious_input[chromium-oversized_input]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","828","test_checkout_validates_required_customer_information[webkit-missing_postal_code]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"","238","test_login_can_be_submitted_with_the_enter_key[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","829","test_login_rejects_invalid_credentials[webkit-password_off_by_one]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","258","test_cart_removes_selected_product[firefox]","tests","2026-10-27","passed","2026-10-27","","test_cart_removes_selected_product","",""
+"","233","test_inventory_sorts_products_by_price_high_to_low[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
 "The site advertises six accounts; five of them must be able to sign in.
 
     Each behaves differently once signed in, so this covers the authentication
     boundary only: credentials are accepted and the catalogue is reachable.
-    ","151","test_accepted_users_reach_the_inventory[chromium-problem_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
+    ","487","test_accepted_users_reach_the_inventory[webkit-standard_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","170","test_login_page_lists_every_accepted_account[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","697","test_product_can_be_added_to_the_cart_from_its_detail_page[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","357","test_error_state_is_cleared_on_a_fresh_visit[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","155","test_checkout_calculates_tax_and_payable_total[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_tax_and_total","",""
+"","313","test_error_state_is_cleared_on_a_fresh_visit[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"Pin SD-001 to a product combination that reproduces it.
+
+    Marked strict, so if SauceDemo ever rounds the subtotal correctly this test
+    starts passing and the suite fails, telling us the defect is fixed and the
+    marker should be removed.
+    ","10679","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[chromium]","tests","2026-10-27","skipped","2026-10-27","","test_checkout_item_total_formatting","",""
+"","208","test_cart_retains_multiple_products[firefox]","tests","2026-10-27","passed","2026-10-27","","test_cart_retains_multiple_products","",""
+"A customer who backs out at the last step must not lose their basket.
+
+    Silently emptying the cart on cancel would cost the sale outright, which
+    makes this a revenue check rather than a navigation one.
+    ","121","test_cancel_from_the_order_overview_keeps_the_cart[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
+"","216","test_standard_user_signs_in_within_budget[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_performance_budget","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","673","test_login_rejects_invalid_credentials[webkit-both_invalid]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"The reset leaves the page contradicting itself.
+
+    The badge and the cart are cleared, but every button a customer can see
+    still offers to remove a product that is no longer in their cart. Marked
+    strict so a fix upstream is noticed rather than silently absorbed.
+    ","11317","test_reset_app_state_restores_the_add_to_cart_buttons[webkit]","tests","2026-10-27","skipped","2026-10-27","","test_inventory_state_management","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","587","test_login_rejects_malicious_input[webkit-script_injection]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","209","test_login_rejects_invalid_credentials[chromium-username_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","332","test_login_rejects_invalid_credentials[chromium-username_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","232","test_login_required_field_validation[firefox-both_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"The catalogue is clean at the blocking gate.
+
+    It was not: SD-007 pinned the unlabelled sort control as a strict xfail
+    until SauceDemo labelled it. The strict marker reported the fix by failing,
+    which is what it was there to do.
+    ","840","test_inventory_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"Sign-in is the one screen nobody can route around.
+
+    Critical and serious findings fail; moderate structural findings are
+    attached to the report but do not block, because they do not stop anyone
+    completing the journey.
+    ","689","test_login_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","241","test_login_can_be_submitted_with_the_enter_key[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
 "Assert the format, not only the arithmetic.
 
     An arithmetic check compares one number against another and passes happily
     on `$105.96000000000001`-style output whenever the selected products happen
     to sum cleanly. Checking the rendered string catches the presentation
     defect regardless of which products were chosen.
-    ","19","test_item_total_is_formatted_as_currency[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"","322","test_checkout_validates_required_customer_information[webkit-missing_last_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"","524","test_cart_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
+    ","28","test_item_total_is_formatted_as_currency[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
+"","671","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"The catalogue's own Remove button is a separate control from the cart's.","221","test_product_can_be_removed_without_opening_the_cart[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","283","test_login_rejects_invalid_credentials[webkit-unknown_username]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"The detail page is where a customer decides to buy.
-
-    A price that disagrees with the catalogue listing is a pricing defect, so
-    the price is compared against the known catalogue value rather than against
-    whatever the previous screen happened to show.
-    ","284","test_product_detail_matches_the_catalogue_entry[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
+    ","152","test_login_rejects_invalid_credentials[chromium-unknown_username]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","107","test_checkout_calculates_tax_and_payable_total[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_tax_and_total","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","427","test_login_rejects_invalid_credentials[webkit-both_invalid]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","343","test_login_rejects_invalid_credentials[firefox-password_off_by_one]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","124","test_cart_continue_shopping_keeps_selected_products[chromium]","tests","2026-10-27","passed","2026-10-27","","test_cart_continue_shopping_returns_to_inventory","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","325","test_login_rejects_invalid_credentials[chromium-both_invalid]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","380","test_login_rejects_invalid_credentials[firefox-username_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
 "Injection-style input is refused with the ordinary failure message.
 
     Returning the same generic error for hostile input matters twice over: it
     proves the payload was not interpreted, and it avoids telling an attacker
     that their input was treated as special.
-    ","128","test_login_rejects_malicious_input[chromium-sql_injection_attempt]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","103","test_cart_retains_multiple_products[chromium]","tests","2026-10-26","passed","2026-10-26","","test_cart_retains_multiple_products","",""
-"","623","test_inventory_is_not_reachable_without_logging_in[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_blocks_direct_inventory_access","",""
+    ","211","test_login_rejects_malicious_input[webkit-sql_injection_attempt]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","497","test_login_rejects_invalid_credentials[webkit-username_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Assert the format, not only the arithmetic.
+
+    An arithmetic check compares one number against another and passes happily
+    on `$105.96000000000001`-style output whenever the selected products happen
+    to sum cleanly. Checking the rendered string catches the presentation
+    defect regardless of which products were chosen.
+    ","14","test_item_total_is_formatted_as_currency[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
 "The site advertises six accounts; five of them must be able to sign in.
 
     Each behaves differently once signed in, so this covers the authentication
     boundary only: credentials are accepted and the catalogue is reachable.
-    ","574","test_accepted_users_reach_the_inventory[webkit-error_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
+    ","398","test_accepted_users_reach_the_inventory[chromium-error_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","189","test_login_rejects_malicious_input[firefox-sql_injection_attempt]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"The detail page is where a customer decides to buy.
+
+    A price that disagrees with the catalogue listing is a pricing defect, so
+    the price is compared against the known catalogue value rather than against
+    whatever the previous screen happened to show.
+    ","570","test_product_detail_matches_the_catalogue_entry[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","110","test_password_is_masked[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"A user who mistypes a password must be able to recover in place.","699","test_error_can_be_dismissed_and_login_retried[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","1255","test_logout_ends_the_session_and_blocks_the_inventory[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_logout_ends_session","",""
+"","346","test_login_page_lists_every_accepted_account[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","523","test_checkout_information_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","215","test_login_rejects_invalid_credentials[chromium-password_off_by_one]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","581","test_login_rejects_invalid_credentials[webkit-password_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","158","test_login_required_field_validation[chromium-both_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","676","test_cart_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","538","test_cart_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","1042","test_accepted_users_reach_the_inventory[webkit-error_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","297","test_inventory_sorts_products_by_price_low_to_high[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","454","test_login_rejects_invalid_credentials[webkit-username_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","576","test_cart_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
+    ","288","test_login_rejects_invalid_credentials[chromium-password_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","120","test_checkout_completes_order_successfully[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
+"","182","test_inventory_sorts_products_by_price_low_to_high[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"","208","test_inventory_sorts_products_by_price_low_to_high[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"Signing out must survive the browser Back button.
+
+    A cached authenticated page served after logout is a genuine session
+    weakness, and Back is the way a real user would stumble into it.
+    ","1086","test_browser_back_does_not_restore_a_signed_out_session[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_session_security","",""
+"The reset leaves the page contradicting itself.
+
+    The badge and the cart are cleared, but every button a customer can see
+    still offers to remove a product that is no longer in their cart. Marked
+    strict so a fix upstream is noticed rather than silently absorbed.
+    ","10452","test_reset_app_state_restores_the_add_to_cart_buttons[firefox]","tests","2026-10-27","skipped","2026-10-27","","test_inventory_state_management","",""
 "The catalogue is clean at the blocking gate.
 
     It was not: SD-007 pinned the unlabelled sort control as a strict xfail
     until SauceDemo labelled it. The strict marker reported the fix by failing,
     which is what it was there to do.
-    ","619","test_inventory_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","200","test_login_rejects_malicious_input[firefox-sql_injection_attempt]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","210","test_checkout_calculates_tax_and_payable_total[firefox]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_tax_and_total","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","125","test_login_rejects_malicious_input[chromium-script_injection]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","81","test_login_page_lists_every_accepted_account[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","182","test_cart_continue_shopping_keeps_selected_products[firefox]","tests","2026-10-26","passed","2026-10-26","","test_cart_continue_shopping_returns_to_inventory","",""
+    ","721","test_inventory_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","133","test_checkout_calculates_item_total_for_selected_products[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_item_total_for_selected_products","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","382","test_login_rejects_invalid_credentials[webkit-password_off_by_one]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","182","test_login_required_field_validation[firefox-both_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"Signing out must survive the browser Back button.
-
-    A cached authenticated page served after logout is a genuine session
-    weakness, and Back is the way a real user would stumble into it.
-    ","1068","test_browser_back_does_not_restore_a_signed_out_session[firefox]","tests","2026-10-26","passed","2026-10-26","","test_login_session_security","",""
-"Assert the format, not only the arithmetic.
-
-    An arithmetic check compares one number against another and passes happily
-    on `$105.96000000000001`-style output whenever the selected products happen
-    to sum cleanly. Checking the rendered string catches the presentation
-    defect regardless of which products were chosen.
-    ","40","test_item_total_is_formatted_as_currency[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","119","test_login_rejects_invalid_credentials[chromium-wrong_password]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","307","test_login_rejects_invalid_credentials[webkit-password_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"A user who mistypes a password must be able to recover in place.","473","test_error_can_be_dismissed_and_login_retried[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","269","test_accepted_users_reach_the_inventory[firefox-standard_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","342","test_checkout_validates_required_customer_information[firefox-missing_first_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"A user who mistypes a password must be able to recover in place.","768","test_error_can_be_dismissed_and_login_retried[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"The detail page is where a customer decides to buy.
-
-    A price that disagrees with the catalogue listing is a pricing defect, so
-    the price is compared against the known catalogue value rather than against
-    whatever the previous screen happened to show.
-    ","175","test_product_detail_matches_the_catalogue_entry[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","389","test_login_rejects_invalid_credentials[webkit-password_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","424","test_checkout_validates_required_customer_information[webkit-missing_first_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","466","test_accepted_users_reach_the_inventory[firefox-error_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","5164","test_accepted_users_reach_the_inventory[chromium-performance_glitch_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","1103","test_logout_ends_the_session_and_blocks_the_inventory[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_logout_ends_session","",""
-"","765","test_successful_login_with_standard_user[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login","",""
-"","106","test_password_is_masked[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","412","test_login_rejects_invalid_credentials[firefox-password_padded]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","139","test_locked_out_user_login[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_locked_out_user_login","",""
-"Signing out must survive the browser Back button.
-
-    A cached authenticated page served after logout is a genuine session
-    weakness, and Back is the way a real user would stumble into it.
-    ","1363","test_browser_back_does_not_restore_a_signed_out_session[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_session_security","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","261","test_accepted_users_reach_the_inventory[chromium-standard_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"Pin SD-001 to a product combination that reproduces it.
-
-    Marked strict, so if SauceDemo ever rounds the subtotal correctly this test
-    starts passing and the suite fails, telling us the defect is fixed and the
-    marker should be removed.
-    ","10824","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[firefox]","tests","2026-10-26","skipped","2026-10-26","","test_checkout_item_total_formatting","",""
-"","479","test_error_state_is_cleared_on_a_fresh_visit[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","1772","test_reset_app_state_empties_the_cart[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
-"Credentials must match exactly.
-
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","515","test_login_rejects_invalid_credentials[webkit-wrong_password]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"The site advertises six accounts; five of them must be able to sign in.
-
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","661","test_accepted_users_reach_the_inventory[webkit-standard_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"Injection-style input is refused with the ordinary failure message.
-
-    Returning the same generic error for hostile input matters twice over: it
-    proves the payload was not interpreted, and it avoids telling an attacker
-    that their input was treated as special.
-    ","301","test_login_rejects_malicious_input[firefox-oversized_input]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"Signing out must survive the browser Back button.
-
-    A cached authenticated page served after logout is a genuine session
-    weakness, and Back is the way a real user would stumble into it.
-    ","1009","test_browser_back_does_not_restore_a_signed_out_session[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_session_security","",""
-"","451","test_inventory_sorts_products_by_price_low_to_high[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_sorts_products_by_price","",""
-"","111","test_login_required_field_validation[chromium-username_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
+    ","455","test_login_rejects_invalid_credentials[firefox-username_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","222","test_completed_order_empties_the_cart[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
+"","451","test_product_can_be_removed_from_its_detail_page[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
 "Sign-in is the one screen nobody can route around.
 
     Critical and serious findings fail; moderate structural findings are
     attached to the report but do not block, because they do not stop anyone
     completing the journey.
-    ","542","test_login_page_has_no_blocking_accessibility_violations[firefox]","tests","2026-10-26","passed","2026-10-26","","test_accessibility","",""
-"Credentials must match exactly.
+    ","945","test_login_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","32","test_password_is_masked[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"A customer who backs out at the last step must not lose their basket.
 
-    Case differences and surrounding whitespace are covered here because a
-    permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","286","test_login_rejects_invalid_credentials[chromium-username_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
-"","312","test_error_state_is_cleared_on_a_fresh_visit[chromium]","tests","2026-10-26","passed","2026-10-26","","test_login_error_handling","",""
-"","1194","test_reset_app_state_empties_the_cart[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
-"","93","test_checkout_calculates_tax_and_payable_total[webkit]","tests","2026-10-26","passed","2026-10-26","","test_checkout_calculates_tax_and_total","",""
-"The catalogue's own Remove button is a separate control from the cart's.","326","test_product_can_be_removed_without_opening_the_cart[firefox]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
+    Silently emptying the cart on cancel would cost the sale outright, which
+    makes this a revenue check rather than a navigation one.
+    ","143","test_cancel_from_the_order_overview_keeps_the_cart[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
+"","67","test_login_page_lists_every_accepted_account[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","245","test_inventory_sorts_products_by_price_high_to_low[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","145","test_login_rejects_malicious_input[chromium-sql_injection_attempt]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","322","test_checkout_validates_required_customer_information[webkit-missing_last_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"The catalogue is clean at the blocking gate.
+
+    It was not: SD-007 pinned the unlabelled sort control as a strict xfail
+    until SauceDemo labelled it. The strict marker reported the fix by failing,
+    which is what it was there to do.
+    ","1079","test_inventory_page_has_no_blocking_accessibility_violations[webkit]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","166","test_login_required_field_validation[chromium-username_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","408","test_completed_order_empties_the_cart[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
+"","192","test_inventory_sorts_products_by_name[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"","56","test_order_overview_lists_every_selected_product[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
+"","71","test_cart_retains_multiple_products[chromium]","tests","2026-10-27","passed","2026-10-27","","test_cart_retains_multiple_products","",""
+"","151","test_cart_continue_shopping_keeps_selected_products[firefox]","tests","2026-10-27","passed","2026-10-27","","test_cart_continue_shopping_returns_to_inventory","",""
+"The catalogue's own Remove button is a separate control from the cart's.","320","test_product_can_be_removed_without_opening_the_cart[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
+"","268","test_checkout_validates_required_customer_information[firefox-missing_postal_code]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"","406","test_successful_login_with_standard_user[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login","",""
+"","270","test_checkout_validates_required_customer_information[chromium-missing_first_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"A user who mistypes a password must be able to recover in place.","670","test_error_can_be_dismissed_and_login_retried[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","227","test_inventory_sorts_products_by_name[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"","150","test_inventory_sorts_products_by_name[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_sorts_products_by_price","",""
+"","179","test_checkout_completes_order_successfully[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
+"The detail page is where a customer decides to buy.
+
+    A price that disagrees with the catalogue listing is a pricing defect, so
+    the price is compared against the known catalogue value rather than against
+    whatever the previous screen happened to show.
+    ","204","test_product_detail_matches_the_catalogue_entry[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","491","test_inventory_is_not_reachable_without_logging_in[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_blocks_direct_inventory_access","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","177","test_login_rejects_malicious_input[chromium-script_injection]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","274","test_back_to_products_returns_to_the_catalogue_with_the_cart_intact[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","136","test_cancel_from_customer_information_returns_to_the_cart[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","200","test_accepted_users_reach_the_inventory[chromium-problem_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","206","test_locked_out_user_login[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_locked_out_user_login","",""
+"A user who mistypes a password must be able to recover in place.","651","test_error_can_be_dismissed_and_login_retried[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","220","test_login_can_be_submitted_with_the_enter_key[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","428","test_accepted_users_reach_the_inventory[chromium-visual_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","122","test_cancel_from_customer_information_returns_to_the_cart[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
+"","1179","test_logout_ends_the_session_and_blocks_the_inventory[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_logout_ends_session","",""
 "Assert the format, not only the arithmetic.
 
     An arithmetic check compares one number against another and passes happily
     on `$105.96000000000001`-style output whenever the selected products happen
     to sum cleanly. Checking the rendered string catches the presentation
     defect regardless of which products were chosen.
-    ","19","test_item_total_is_formatted_as_currency[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_item_total_formatting","",""
-"The site advertises six accounts; five of them must be able to sign in.
+    ","45","test_item_total_is_formatted_as_currency[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
+"","302","test_standard_user_signs_in_within_budget[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_performance_budget","",""
+"A customer who backs out at the last step must not lose their basket.
 
-    Each behaves differently once signed in, so this covers the authentication
-    boundary only: credentials are accepted and the catalogue is reachable.
-    ","306","test_accepted_users_reach_the_inventory[chromium-visual_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"","85","test_cancel_from_customer_information_returns_to_the_cart[chromium]","tests","2026-10-26","passed","2026-10-26","","test_checkout_cancel_abandons_the_order","",""
-"","228","test_cart_removes_selected_product[firefox]","tests","2026-10-26","passed","2026-10-26","","test_cart_removes_selected_product","",""
-"","788","test_product_can_be_removed_from_its_detail_page[webkit]","tests","2026-10-26","passed","2026-10-26","","test_inventory_product_detail_page","",""
+    Silently emptying the cart on cancel would cost the sale outright, which
+    makes this a revenue check rather than a navigation one.
+    ","188","test_cancel_from_the_order_overview_keeps_the_cart[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
+"Injection-style input is refused with the ordinary failure message.
+
+    Returning the same generic error for hostile input matters twice over: it
+    proves the payload was not interpreted, and it avoids telling an attacker
+    that their input was treated as special.
+    ","714","test_login_rejects_malicious_input[webkit-oversized_input]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","587","test_cart_page_has_no_blocking_accessibility_violations[chromium]","tests","2026-10-27","passed","2026-10-27","","test_accessibility","",""
+"","196","test_standard_user_signs_in_within_budget[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_performance_budget","",""
+"","278","test_login_required_field_validation[firefox-password_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","72","test_order_overview_lists_every_selected_product[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_item_total_formatting","",""
+"Signing out must survive the browser Back button.
+
+    A cached authenticated page served after logout is a genuine session
+    weakness, and Back is the way a real user would stumble into it.
+    ","1177","test_browser_back_does_not_restore_a_signed_out_session[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_session_security","",""
 "Credentials must match exactly.
 
     Case differences and surrounding whitespace are covered here because a
     permissive comparison is a real authentication weakness, not a cosmetic one.
-    ","316","test_login_rejects_invalid_credentials[firefox-username_wrong_case]","tests","2026-10-26","passed","2026-10-26","","test_login_rejected_invalid_credentials","",""
+    ","379","test_login_rejects_invalid_credentials[webkit-password_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","371","test_login_rejects_invalid_credentials[chromium-password_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"The detail page is where a customer decides to buy.
+
+    A price that disagrees with the catalogue listing is a pricing defect, so
+    the price is compared against the known catalogue value rather than against
+    whatever the previous screen happened to show.
+    ","282","test_product_detail_matches_the_catalogue_entry[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"","196","test_checkout_validates_required_customer_information[firefox-missing_last_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"The reset leaves the page contradicting itself.
+
+    The badge and the cart are cleared, but every button a customer can see
+    still offers to remove a product that is no longer in their cart. Marked
+    strict so a fix upstream is noticed rather than silently absorbed.
+    ","11137","test_reset_app_state_restores_the_add_to_cart_buttons[chromium]","tests","2026-10-27","skipped","2026-10-27","","test_inventory_state_management","",""
+"","216","test_cart_continue_shopping_keeps_selected_products[webkit]","tests","2026-10-27","passed","2026-10-27","","test_cart_continue_shopping_returns_to_inventory","",""
+"The catalogue's own Remove button is a separate control from the cart's.","678","test_product_can_be_removed_without_opening_the_cart[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
+"","83","test_password_is_masked[firefox]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","151","test_checkout_calculates_item_total_for_selected_products[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_item_total_for_selected_products","",""
+"","781","test_login_required_field_validation[webkit-password_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","315","test_completed_order_empties_the_cart[firefox]","tests","2026-10-27","passed","2026-10-27","","test_checkout_completes_order_successfully","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","5667","test_accepted_users_reach_the_inventory[firefox-performance_glitch_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","537","test_accepted_users_reach_the_inventory[firefox-error_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"Signing out must survive the browser Back button.
+
+    A cached authenticated page served after logout is a genuine session
+    weakness, and Back is the way a real user would stumble into it.
+    ","1032","test_browser_back_does_not_restore_a_signed_out_session[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_session_security","",""
+"","188","test_locked_out_user_login[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_locked_out_user_login","",""
+"","293","test_product_can_be_added_to_the_cart_from_its_detail_page[firefox]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"The site advertises six accounts; five of them must be able to sign in.
+
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","5580","test_accepted_users_reach_the_inventory[webkit-performance_glitch_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","244","test_cart_retains_multiple_products[webkit]","tests","2026-10-27","passed","2026-10-27","","test_cart_retains_multiple_products","",""
+"","409","test_inventory_is_not_reachable_without_logging_in[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_blocks_direct_inventory_access","",""
+"","433","test_login_required_field_validation[firefox-username_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","256","test_error_state_is_cleared_on_a_fresh_visit[chromium]","tests","2026-10-27","passed","2026-10-27","","test_login_error_handling","",""
+"","77","test_cancel_from_customer_information_returns_to_the_cart[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_cancel_abandons_the_order","",""
 "Prove the harness can actually detect a slow sign-in.
 
     Comparing the two accounts in one browser session makes this a relative
     measurement, so it stays meaningful on a loaded CI runner where an absolute
     threshold would be flaky.
-    ","6680","test_performance_glitch_user_sign_in_is_measurably_slower[webkit]","tests","2026-10-26","passed","2026-10-26","","test_login_performance_budget","",""
+    ","6489","test_performance_glitch_user_sign_in_is_measurably_slower[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login_performance_budget","",""
+"","175","test_checkout_calculates_item_total_for_selected_products[webkit]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_item_total_for_selected_products","",""
+"","262","test_login_required_field_validation[webkit-both_empty]","tests","2026-10-27","passed","2026-10-27","","test_login_fields_validation","",""
+"","346","test_product_can_be_removed_from_its_detail_page[chromium]","tests","2026-10-27","passed","2026-10-27","","test_inventory_product_detail_page","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","323","test_login_rejects_invalid_credentials[firefox-wrong_password]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
 "The site advertises six accounts; five of them must be able to sign in.
 
     Each behaves differently once signed in, so this covers the authentication
     boundary only: credentials are accepted and the catalogue is reachable.
-    ","216","test_accepted_users_reach_the_inventory[chromium-error_user]","tests","2026-10-26","passed","2026-10-26","","test_login_accepted_users_can_sign_in","",""
-"Pin SD-001 to a product combination that reproduces it.
+    ","358","test_accepted_users_reach_the_inventory[webkit-visual_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"The site advertises six accounts; five of them must be able to sign in.
 
-    Marked strict, so if SauceDemo ever rounds the subtotal correctly this test
-    starts passing and the suite fails, telling us the defect is fixed and the
-    marker should be removed.
-    ","10515","test_item_total_is_formatted_as_currency_for_a_lossy_price_sum[chromium]","tests","2026-10-26","skipped","2026-10-26","","test_checkout_item_total_formatting","",""
-"","476","test_login_required_field_validation[webkit-username_empty]","tests","2026-10-26","passed","2026-10-26","","test_login_fields_validation","",""
-"The catalogue's own Remove button is a separate control from the cart's.","201","test_product_can_be_removed_without_opening_the_cart[chromium]","tests","2026-10-26","passed","2026-10-26","","test_inventory_state_management","",""
-"","102","test_cart_retains_multiple_products[firefox]","tests","2026-10-26","passed","2026-10-26","","test_cart_retains_multiple_products","",""
-"","214","test_checkout_validates_required_customer_information[chromium-missing_first_name]","tests","2026-10-26","passed","2026-10-26","","test_checkout_validates_required_customer_information","",""
+    Each behaves differently once signed in, so this covers the authentication
+    boundary only: credentials are accepted and the catalogue is reachable.
+    ","432","test_accepted_users_reach_the_inventory[firefox-problem_user]","tests","2026-10-27","passed","2026-10-27","","test_login_accepted_users_can_sign_in","",""
+"","174","test_cart_removes_selected_product[webkit]","tests","2026-10-27","passed","2026-10-27","","test_cart_removes_selected_product","",""
+"","100","test_checkout_calculates_tax_and_payable_total[chromium]","tests","2026-10-27","passed","2026-10-27","","test_checkout_calculates_tax_and_total","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","192","test_login_rejects_invalid_credentials[firefox-password_padded]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"","317","test_checkout_validates_required_customer_information[chromium-missing_last_name]","tests","2026-10-27","passed","2026-10-27","","test_checkout_validates_required_customer_information","",""
+"","671","test_successful_login_with_standard_user[webkit]","tests","2026-10-27","passed","2026-10-27","","test_login","",""
+"","1530","test_reset_app_state_empties_the_cart[webkit]","tests","2026-10-27","passed","2026-10-27","","test_inventory_state_management","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","389","test_login_rejects_invalid_credentials[firefox-both_invalid]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","170","test_login_rejects_invalid_credentials[chromium-wrong_password]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
+"Credentials must match exactly.
+
+    Case differences and surrounding whitespace are covered here because a
+    permissive comparison is a real authentication weakness, not a cosmetic one.
+    ","237","test_login_rejects_invalid_credentials[firefox-password_wrong_case]","tests","2026-10-27","passed","2026-10-27","","test_login_rejected_invalid_credentials","",""
